@@ -9,8 +9,10 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 find_package(Boost REQUIRED)
+find_package(Torch REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${TORCH_INCLUDE_DIRS})
 
 include(GNUInstallDirs)
 
@@ -38,24 +40,13 @@ else()
   add_compile_options(-Wall -Wconversion -Wextra -pedantic)
 endif()
 
-set(LIBSRC
-  dnf/Layer.cpp
-  dnf/Net.cpp
-  dnf/Neuron.cpp
-  )
+add_library(dnf STATIC dnf.cpp)
 
-set(LIBINCLUDE
-  dnf/Layer.h
-  dnf/Net.h
-  dnf/Neuron.h
-  )
-
-add_library(dnf STATIC ${LIBSRC})
+target_link_libraries(dnf ${TORCH_LIBRARIES})
 
 set_target_properties(dnf PROPERTIES
   POSITION_INDEPENDENT_CODE TRUE
-  PUBLIC_HEADER dnf.h
-  PRIVATE_HEADER "${LIBINCLUDE}")
+  PUBLIC_HEADER dnf.h)
 
 install(TARGETS dnf EXPORT dnf-targets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
