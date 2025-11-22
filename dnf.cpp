@@ -10,10 +10,7 @@ float DNF::filter(const float signal, const float noise) {
     }
 
     // REMOVER OUTPUT FROM NETWORK
-    torch::Tensor output;
-
-    output = model->forward(noiseTimeSeries);
-    
+    torch::Tensor output = model->forward(noiseTimeSeries,actMethod);
     auto a = output.accessor<float,1>();
     remover = a[0];
     
@@ -22,7 +19,7 @@ float DNF::filter(const float signal, const float noise) {
     // FEEDBACK TO THE NETWORK
     optimizer->zero_grad();
     torch::Tensor gradient = torch::tensor({-f_nn});
-    //output.retain_grad();
+    output.retain_grad();
     output.backward(gradient);
     optimizer->step();
 

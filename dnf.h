@@ -80,7 +80,7 @@ public:
 		if (debugOutput)
 		    fprintf(stderr,"Creating FC layer: %s\n",tmp);
 		torch::nn::Linear ll = register_module(tmp, torch::nn::Linear(inputNeurons, outputNeurons));
-		torch::nn::init::xavier_uniform_(ll->weight,0.01);
+		torch::nn::init::xavier_uniform_(ll->weight,xavierGain);
 		torch::nn::init::constant_(ll->bias, 0.0);
 		fc.push_back(ll);
 		if (1 == outputNeurons) break;
@@ -88,9 +88,23 @@ public:
 	    }
 	}
 
-	torch::Tensor forward(torch::Tensor x) {
+	torch::Tensor forward(torch::Tensor x, ActMethod am) {
 	    for(auto& f:fc) {
-		x = torch::atan(f->forward(x));
+		switch (am) {
+		default:
+		case Act_Tanh:
+		    x = torch::atan(f->forward(x));
+		    break;
+		case Act_Sigmoid:
+		    x = torch::sigmoid(f->forward(x));
+		    break;
+		case Act_ReLU:
+		    x = torch::relu(f->forward(x));
+		    break;
+		case Act_NONE:
+		    x = f->forward(x);
+		    break;
+		}
 	    }
 	    return x;
 	}
@@ -204,7 +218,6 @@ public:
     
 private:
     Net* model = nullptr;
-    torch::Tensor output;
     torch::optim::SGD* optimizer = nullptr;
     const int noiseDelayLineLength;
     const int signalDelayLineLength;
@@ -214,6 +227,7 @@ private:
     DelayLine noise_delayLine;
     float remover = 0;
     float f_nn = 0;
+    static constexpr double xavierGain = 0.01;
 };
 
 #endif
