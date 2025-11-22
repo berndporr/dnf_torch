@@ -74,7 +74,7 @@ int main(int argc, char* argv[]){
 
 	    double f_nn = dnf.filter(input_signal, ref_noise);
 
-	    fprintf(foutput,"%f %f %f\n",f_nn, input_signal, ref_noise);
+	    fprintf(foutput,"%f %f %f\n",f_nn, input_signal, dnf.getRemover());
 	}
 
     auto elapsed = std::chrono::high_resolution_clock::now() - start;

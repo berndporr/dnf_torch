@@ -6,23 +6,17 @@ fs = 1000
 
 data = np.loadtxt("ecg_filtered.dat")
 
-col = 0
+flt = data[:,0]
+orig = data[:,1]
+ref = data[:,2]
 
-if len(sys.argv) > 1:
-    col = int(sys.argv[1])
-
-d = data[:,col]
-
-t = np.linspace(0,len(d)/fs,len(d))
-plt.plot(t,d)
-plt.xlabel("time/sec")
-plt.ylabel("amplitude")
-fy = np.fft.fft(d)
-plt.figure()
-fx = np.linspace(0,fs,len(fy))
-plt.semilogy(fx,np.abs(fy)/len(fy))
-plt.xlabel("frequ/Hz")
-plt.ylabel("amplitude")
-plt.ylim([0,0.1])
-plt.xlim([0,500])
-plt.show()
+fig=plt.figure()
+ax1 = plt.subplot(311)
+ax2 = plt.subplot(312, sharex = ax1)
+ax3 = plt.subplot(313, sharex = ax1)
+ax1.plot(orig)
+ax2.plot(ref)
+ax3.plot(flt)
+plt.xlabel("time")
+plt.ylabel("volt")
+plt.show()    
