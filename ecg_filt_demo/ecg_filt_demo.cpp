@@ -33,7 +33,7 @@ double noise_f = 50; //Hz
 const DNF::ActMethod ACTIVATION = DNF::Act_Tanh;
 
 // dnf learning rate
-const double dnf_learning_rate = 0.1;
+const double dnf_learning_rate = 0.001;
 
 // input filename
 const char inputFilename[] = "ecg50hz.dat";

@@ -53,6 +53,13 @@ public:
 	    if (debug)
 		fprintf(stderr,"Creating FC output layer: %d -> output\n",inputNeurons);
 	    fc.push_back(register_module("fc_out", torch::nn::Linear(inputNeurons, 2)));
+
+	    for (auto &module : this->modules(/*include_self=*/false)) {
+		if (auto M = dynamic_cast<torch::nn::LinearImpl*>(module.get())) {
+		    torch::nn::init::xavier_uniform_(M->weight);
+		    torch::nn::init::constant_(M->bias, 0.0);
+		}
+	    }
 	}
 
 	torch::Tensor forward(torch::Tensor x) {
