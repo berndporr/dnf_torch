@@ -58,15 +58,6 @@ class DNF {
 public:
 
     /**
-     * Options for method of initialising weights
-     * 0 for initialising all weights to zero
-     * 1 for initialising all weights to one
-     * 2 for initialising all weights to a random value between 0 and 1
-     */
-    enum WeightInitMethod { W_ZEROS = 0,
-	W_ONES = 1, W_RANDOM = 2, W_ONES_NORM = 3, W_RANDOM_NORM = 5,  };
-    
-    /**
      * Options for activation functions of the neuron
      * 0 for using the logistic function
      * 1 for using the hyperbolic tan function
@@ -112,15 +103,18 @@ public:
      * that the final layer always just has one neuron.
      * \param nLayers Number of layers
      * \param nTaps Number of taps for the delay line feeding into the 1st layer
-     * \param fs Sampling rate of the signals used in Hz.
+     * \param samplingrate Sampling rate of the signals used in Hz.
      * \param am The activation function for the neurons. Default is tanh.
      **/
     DNF(const int nLayers,
 	const int nTaps,
-	const float fs,
+	const float samplingrate,
 	const ActMethod am = Act_Tanh
 	) : noiseDelayLineLength(nTaps),
-	    signalDelayLineLength(noiseDelayLineLength / 2) {
+	    signalDelayLineLength(noiseDelayLineLength / 2),
+	    fs(samplingrate),
+	    actMethod(am)
+	{
 
 	signal_delayLine.init(signalDelayLineLength);
 	noise_delayLine.init(noiseDelayLineLength);
@@ -209,11 +203,13 @@ public:
     }
     
 private:
-    Net* model;
+    Net* model = nullptr;
     torch::Tensor output;
     torch::optim::SGD* optimizer = nullptr;
-    int noiseDelayLineLength;
-    int signalDelayLineLength;
+    const int noiseDelayLineLength;
+    const int signalDelayLineLength;
+    const float fs;
+    const ActMethod actMethod;
     DelayLine signal_delayLine;
     DelayLine noise_delayLine;
     float remover = 0;
