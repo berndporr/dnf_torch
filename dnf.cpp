@@ -25,8 +25,8 @@ float DNF::filter(const float signal, const float noise) {
     
     // FEEDBACK TO THE NETWORK
     optimizer->zero_grad();
-    torch::Tensor gradient = torch::tensor({f_nn,f_nn});
-    output.retain_grad();
+    torch::Tensor gradient = torch::tensor({f_nn});
+    //output.retain_grad();
     output.backward(gradient);
     optimizer->step();
 

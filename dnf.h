@@ -9,6 +9,12 @@
 #include <thread>
 #include <boost/circular_buffer.hpp>
 
+#ifdef NDEBUG
+const bool debugOutput = false;
+#else
+const bool debugOutput = true;
+#endif
+
 /**
  * Main Deep Neuronal Network main class.
  * It's designed to be as simple as possible with
@@ -37,28 +43,22 @@ public:
     struct Net : public torch::nn::Module {
 	std::vector<torch::nn::Linear> fc;
 	
-	Net(int nLayers, int nInput, bool debug=false) {
+	Net(int nLayers, int nInput) {
 	    // calc an exp reduction of the numbers always reaching 1
 	    const float b = (float)exp(log(nInput)/(nLayers-1));
 	    int inputNeurons = nInput;
 	    for(int i=1;i<nLayers;i++) {
-		const int outputNeurons = (int)ceil(nInput / pow(b,i));
+		int outputNeurons = (int)ceil(nInput / pow(b,i));
+		if (outputNeurons == (nLayers-1)) outputNeurons = 1;
 		char tmp[256];
 		sprintf(tmp,"fc%d_%d_%d",i,inputNeurons,outputNeurons);
-		if (debug)
+		if (debugOutput)
 		    fprintf(stderr,"Creating FC layer: %s\n",tmp);
-		fc.push_back(register_module(tmp, torch::nn::Linear(inputNeurons, outputNeurons)));
+		torch::nn::Linear ll = register_module(tmp, torch::nn::Linear(inputNeurons, outputNeurons));
+		torch::nn::init::xavier_uniform_(ll->weight);
+		torch::nn::init::constant_(ll->bias, 0.0);
+		fc.push_back(ll);
 		inputNeurons = outputNeurons;
-	    }
-	    if (debug)
-		fprintf(stderr,"Creating FC output layer: %d -> output\n",inputNeurons);
-	    fc.push_back(register_module("fc_out", torch::nn::Linear(inputNeurons, 2)));
-
-	    for (auto &module : this->modules(/*include_self=*/false)) {
-		if (auto M = dynamic_cast<torch::nn::LinearImpl*>(module.get())) {
-		    torch::nn::init::xavier_uniform_(M->weight);
-		    torch::nn::init::constant_(M->bias, 0.0);
-		}
 	    }
 	}
 
@@ -83,8 +83,7 @@ public:
     DNF(const int nLayers,
 	const int nTaps,
 	const float fs,
-	const ActMethod am = Act_Tanh,
-	const bool debugOutput = false
+	const ActMethod am = Act_Tanh
 	) : noiseDelayLineLength(nTaps),
 	    signalDelayLineLength(noiseDelayLineLength / 2),
 	    signal_delayLine(signalDelayLineLength),
@@ -102,7 +101,7 @@ public:
 	}
 	torch::Device device(device_type);
 
-	model = new Net(nLayers,nTaps,debugOutput);
+	model = new Net(nLayers,nTaps);
 	model->to(device);
 	model->train();
 	
@@ -181,7 +180,6 @@ private:
     int signalDelayLineLength;
     boost::circular_buffer<float> signal_delayLine;
     float* noise_delayLine;
-    int* nNeurons;
     float remover = 0;
     float f_nn = 0;
 };
