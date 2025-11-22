@@ -1,22 +1,18 @@
 #include "dnf.h"
 
 float DNF::filter(const float signal, const float noise) {
-    signal_delayLine.push_back(signal);
-    const float delayed_signal = signal_delayLine[0];
-    
-    for (int i = noiseDelayLineLength-1 ; i > 0; i--) {
-	noise_delayLine[i] = noise_delayLine[i-1];
-    }
-    noise_delayLine[0] = noise;
+    const float delayed_signal = signal_delayLine.process(signal);
+    noise_delayLine.process(noise);
 
-    // NOISE INPUT TO NETWORK
-    torch::Tensor data = torch::from_blob(
-        noise_delayLine, {noiseDelayLineLength}, torch::kFloat);
+    auto noiseTimeSeries = torch::zeros(noiseDelayLineLength,torch::kFloat);
+    for(int i = 0; i < noiseDelayLineLength; i++) {
+	noiseTimeSeries[i] = noise_delayLine.get(i);
+    }
 
     // REMOVER OUTPUT FROM NETWORK
     torch::Tensor output;
 
-    output = model->forward(data);
+    output = model->forward(noiseTimeSeries);
     
     auto a = output.accessor<float,1>();
     remover = a[0];
@@ -25,7 +21,7 @@ float DNF::filter(const float signal, const float noise) {
     
     // FEEDBACK TO THE NETWORK
     optimizer->zero_grad();
-    torch::Tensor gradient = torch::tensor({f_nn});
+    torch::Tensor gradient = torch::tensor({-f_nn});
     //output.retain_grad();
     output.backward(gradient);
     optimizer->step();

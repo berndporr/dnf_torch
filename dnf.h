@@ -7,13 +7,47 @@
 #include <assert.h>
 #include <torch/torch.h>
 #include <thread>
-#include <boost/circular_buffer.hpp>
+#include <iostream>
+#include <deque>
 
 #ifdef NDEBUG
 const bool debugOutput = false;
 #else
 const bool debugOutput = true;
 #endif
+
+class DelayLine {
+public:
+    void init(size_t delaySamples)
+    {
+        delaySamples_ = delaySamples;
+        buffer_ = std::deque<float>(delaySamples_, 0.0f);
+    }
+
+    float process(float input) {
+        // Output is the oldest value (front of deque)
+        float output = buffer_.front();
+        buffer_.pop_front();
+	
+        // Push new input to the back
+        buffer_.push_back(input);
+
+        return output;
+    }
+
+    float get(int i) const {
+	return buffer_[i];
+    }
+
+    float getNewest() const {
+	return buffer_.back();
+    }
+
+private:
+    size_t delaySamples_ = 0;
+    std::deque<float> buffer_;
+};
+
 
 /**
  * Main Deep Neuronal Network main class.
@@ -55,7 +89,7 @@ public:
 		if (debugOutput)
 		    fprintf(stderr,"Creating FC layer: %s\n",tmp);
 		torch::nn::Linear ll = register_module(tmp, torch::nn::Linear(inputNeurons, outputNeurons));
-		torch::nn::init::xavier_uniform_(ll->weight);
+		torch::nn::init::xavier_uniform_(ll->weight,0.01);
 		torch::nn::init::constant_(ll->bias, 0.0);
 		fc.push_back(ll);
 		inputNeurons = outputNeurons;
@@ -85,14 +119,15 @@ public:
 	const float fs,
 	const ActMethod am = Act_Tanh
 	) : noiseDelayLineLength(nTaps),
-	    signalDelayLineLength(noiseDelayLineLength / 2),
-	    signal_delayLine(signalDelayLineLength),
-	    noise_delayLine(new float[noiseDelayLineLength]()) {
+	    signalDelayLineLength(noiseDelayLineLength / 2) {
+
+	signal_delayLine.init(signalDelayLineLength);
+	noise_delayLine.init(noiseDelayLineLength);
 
 	torch::manual_seed(1);
     
 	torch::DeviceType device_type;
-	if (torch::cuda::is_available()) {
+	if (false) /** torch::cuda::is_available()) **/ {
 	    std::cout << "CUDA available! Training on GPU." << std::endl;
 	    device_type = torch::kCUDA;
 	} else {
@@ -137,7 +172,7 @@ public:
      * \returns The delayed noise polluted signal sample.
      **/
     inline float getDelayedSignal() const {
-	return signal_delayLine[0];
+	return signal_delayLine.get(0);
     }
     
     /**
@@ -178,8 +213,8 @@ private:
     torch::optim::SGD* optimizer = nullptr;
     int noiseDelayLineLength;
     int signalDelayLineLength;
-    boost::circular_buffer<float> signal_delayLine;
-    float* noise_delayLine;
+    DelayLine signal_delayLine;
+    DelayLine noise_delayLine;
     float remover = 0;
     float f_nn = 0;
 };
