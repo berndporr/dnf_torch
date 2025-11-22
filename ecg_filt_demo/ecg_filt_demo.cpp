@@ -30,7 +30,7 @@ double fs = 1000; // Hz
 double noise_f = 50; //Hz
 
 // activation
-const Neuron::actMethod ACTIVATION = Neuron::Act_Tanh;
+const DNF::ActMethod ACTIVATION = DNF::Act_Tanh;
 
 // dnf learning rate
 const double dnf_learning_rate = 0.1;
@@ -67,9 +67,9 @@ int main(int argc, char* argv[]){
 	    double ref_noise = sin(2*M_PI*norm_noise_f*(double)i);
 
 	    if (i > nTapsDNF){
-		dnf.getNet().setLearningRate(dnf_learning_rate, 0);
+		dnf.setLearningRate(dnf_learning_rate);
 	    } else {
-		dnf.getNet().setLearningRate(0, 0);
+		dnf.setLearningRate(0);
 	    }
 
 	    double f_nn = dnf.filter(input_signal, ref_noise);

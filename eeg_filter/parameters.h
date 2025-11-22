@@ -6,7 +6,7 @@
 const char* const p300Path = "../../gla_researchdata_1258/EEG_recordings/participant%03d/rawp300.tsv";
 const char* const tasksPath = "../../gla_researchdata_1258/EEG_recordings/participant%03d/%s.tsv";
 
-const Neuron::actMethod ACTIVATION = Neuron::Act_Tanh;
+const DNF::ActMethod ACTIVATION = DNF::Act_Tanh;
 
 // number of subjects
 const int nSubj = 20;

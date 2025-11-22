@@ -5,7 +5,7 @@ project(dnf LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  set(CMAKE_BUILD_TYPE "RelWithDebInfo")
+  set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
 find_package(Boost REQUIRED)
@@ -17,6 +17,7 @@ include_directories(${TORCH_INCLUDE_DIRS})
 include(GNUInstallDirs)
 
 add_subdirectory(ecg_filt_demo)
+add_subdirectory(eeg_ecg_filter)
 
 find_package(OpenCV)
 
@@ -27,7 +28,6 @@ else()
     message(STATUS "OpenCV found: ${OpenCV_VERSION}")
     include_directories(${OpenCV_INCLUDE_DIRS})
     add_subdirectory(eeg_filter)
-    add_subdirectory(eeg_ecg_filter)
     add_subdirectory(eeg_sim)
     add_subdirectory(cvui)
 endif()

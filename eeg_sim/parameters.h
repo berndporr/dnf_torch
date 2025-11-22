@@ -19,7 +19,7 @@ const double jawclenchNoiseBoost = 5; // gain
 const float signalAmplitude = 35; // uV (before lowpass filtering)
 const double signalModelLowpassFreq = 17; // Hz
 
-const Neuron::actMethod ACTIVATION = Neuron::Act_Tanh;
+const DNF::ActMethod ACTIVATION = DNF::Act_Tanh;
 
 // pre-filtering
 const int filterorder = 2;

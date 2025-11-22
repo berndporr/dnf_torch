@@ -196,14 +196,14 @@ void runSimulation(const float duration,
 
 		float w_eta = dnf_learning_rate;
 		if (count > (samplesNoLearning+nTapsDNF)){
-			dnf.getNet().setLearningRate(w_eta, 0);
+			dnf.setLearningRate(w_eta);
 		} else {
-			dnf.getNet().setLearningRate(0, 0);
+			dnf.setLearningRate(0);
 		}
 		
-		wdistance_file << dnf.getNet().getWeightDistance();
+		wdistance_file << 0;
 		for(int i=0; i < NLAYERS; i++ ) {
-			wdistance_file << "\t" << dnf.getNet().getLayerWeightDistance(i);
+			wdistance_file << "\t" << dnf.getLayerWeightDistance(i);
 		}
 		wdistance_file << endl;
 

@@ -78,9 +78,6 @@ void processOneSubject(const int subjIndex, const char* tasksubdir = nullptr, co
 	fstream laplace_file;
 	ifstream p300_infile;
 	fstream wdistance_file;
-#ifdef SAVE_WEIGHTS
-	fstream weight_file;
-#endif
 
 	long count = 0;
 	
@@ -105,9 +102,6 @@ void processOneSubject(const int subjIndex, const char* tasksubdir = nullptr, co
 	outer_file.open(outpPrefix+"/subject" + sbjct + "/outer.tsv", fstream::out);
 	lms_file.open(outpPrefix+"/subject" + sbjct + "/lms.tsv", fstream::out);
 	laplace_file.open(outpPrefix+"/subject" + sbjct + "/laplace.tsv", fstream::out);
-#ifdef SAVE_WEIGHTS
-	weight_file.open(outpPrefix+"/subject" + sbjct + "/lWeights.tsv", fstream::out);
-#endif
 	wdistance_file.open(outpPrefix+"/subject" + sbjct + "/weight_distance.tsv", fstream::out);
 	
 	char fullpath2data[256];
@@ -187,18 +181,14 @@ void processOneSubject(const int subjIndex, const char* tasksubdir = nullptr, co
 			w_eta = dnf_learning_rate_tasks;
 		}
 		if (count > (samplesNoLearning+nTapsDNF)){
-			dnf.getNet().setLearningRate(w_eta, 0);
+			dnf.setLearningRate(w_eta);
 		} else {
-			dnf.getNet().setLearningRate(0, 0);
+			dnf.setLearningRate(0);
 		}
 		
-#ifdef SAVE_WEIGHTS
-		// SAVE WEIGHTS
-		NNO.snapWeights(outpPrefix, "p300", subjIndex);
-#endif
-		wdistance_file << dnf.getNet().getWeightDistance();
+		wdistance_file << 0;
 		for(int i=0; i < NLAYERS; i++ ) {
-			wdistance_file << "\t" << dnf.getNet().getLayerWeightDistance(i);
+			wdistance_file << "\t" << dnf.getLayerWeightDistance(i);
 		}
 		wdistance_file << endl;
 
@@ -269,7 +259,6 @@ void processOneSubject(const int subjIndex, const char* tasksubdir = nullptr, co
 			}
 		}
 	}
-	dnf.getNet().snapWeights(outpPrefix, "p300", subjIndex);
 	p300_infile.close();
 	dnf_file.close();
 	inner_file.close();
@@ -277,9 +266,7 @@ void processOneSubject(const int subjIndex, const char* tasksubdir = nullptr, co
 	lms_file.close();
 	laplace_file.close();
 	wdistance_file.close();
-#ifdef SAVE_WEIGHTS
-	weight_file.close();
-#endif
+
 	if (plots) delete plots;
 	auto stoptime = chrono::high_resolution_clock::now();
 	auto time_taken = stoptime - starttime;

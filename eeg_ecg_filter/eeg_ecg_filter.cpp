@@ -37,7 +37,7 @@ const double powerlineFrequ = 50; // Hz
 const double bsBandwidth = 2.5; // Hz
 
 // activation
-const Neuron::actMethod ACTIVATION = Neuron::Act_Tanh;
+const DNF::ActMethod ACTIVATION = DNF::Act_Tanh;
 
 // dnf learning rate
 const double dnf_learning_rate = 1;
@@ -85,9 +85,9 @@ int main(int argc, char* argv[]){
 	    ecg = eeg_filterBS.filter(ecg);
 
 	    if (i > nTapsDNF){
-		dnf.getNet().setLearningRate(dnf_learning_rate, 0);
+		dnf.setLearningRate(dnf_learning_rate);
 	    } else {
-		dnf.getNet().setLearningRate(0, 0);
+		dnf.setLearningRate(0);
 	    }
 
 	    double f_nn = dnf.filter(eeg, ecg);

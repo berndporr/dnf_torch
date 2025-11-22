@@ -158,6 +158,13 @@ public:
 	delete optimizer;
 	delete model;
     }
+
+    /**
+     * Todo: get the weight distance
+     **/
+    float getLayerWeightDistance(int layerIndex) {
+	return 0;
+    }
     
 private:
     Net* model;
