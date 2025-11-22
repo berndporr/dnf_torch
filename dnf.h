@@ -83,7 +83,7 @@ public:
 	    int inputNeurons = nInput;
 	    for(int i=1;i<nLayers;i++) {
 		int outputNeurons = (int)ceil(nInput / pow(b,i));
-		if (outputNeurons == (nLayers-1)) outputNeurons = 1;
+		if (i == (nLayers-1)) outputNeurons = 1;
 		char tmp[256];
 		sprintf(tmp,"fc%d_%d_%d",i,inputNeurons,outputNeurons);
 		if (debugOutput)
@@ -92,6 +92,7 @@ public:
 		torch::nn::init::xavier_uniform_(ll->weight,0.01);
 		torch::nn::init::constant_(ll->bias, 0.0);
 		fc.push_back(ll);
+		if (1 == outputNeurons) break;
 		inputNeurons = outputNeurons;
 	    }
 	}
