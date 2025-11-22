@@ -44,9 +44,9 @@ public:
 	    for(int i=1;i<nLayers;i++) {
 		const int outputNeurons = (int)ceil(nInput / pow(b,i));
 		char tmp[256];
+		sprintf(tmp,"fc%d_%d_%d",i,inputNeurons,outputNeurons);
 		if (debug)
-		    sprintf(tmp,"fc%d_%d_%d",i,inputNeurons,outputNeurons);
-		fprintf(stderr,"Creating FC layer: %s\n",tmp);
+		    fprintf(stderr,"Creating FC layer: %s\n",tmp);
 		fc.push_back(register_module(tmp, torch::nn::Linear(inputNeurons, outputNeurons)));
 		inputNeurons = outputNeurons;
 	    }
