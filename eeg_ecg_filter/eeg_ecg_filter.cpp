@@ -1,8 +1,3 @@
-/**
- * Filter demo which removes 50Hz from an ECG containing
- * 50Hz noise.
- **/
-
 #include <chrono>
 #include <iostream>
 #include <stdio.h>
@@ -19,11 +14,11 @@
 using namespace std; 
 
 // Integer of the total number of hidden layers
-// required not including the input layer
-const int NLAYERS = 3;
+// required including the input layer
+const int NLAYERS = 4;
 
 // Number of taps of the delay line
-const int nTapsDNF = 100;
+const int nTapsDNF = 125;
 
 // Sampling rate
 double fs = 250; // Hz
@@ -33,14 +28,11 @@ const int filterorder = 2;
 const double eegHighpassCutOff = 0.5; // Hz
 const double ecgHighpassCutOff = 0.5; // Hz
 
-const double powerlineFrequ = 50; // Hz
-const double bsBandwidth = 2.5; // Hz
-
 // activation
 const DNF::ActMethod ACTIVATION = DNF::Act_Tanh;
 
 // dnf learning rate
-const double dnf_learning_rate = 1;
+const double dnf_learning_rate = 0.5;
 
 // input filename
 const char inputFilename[] = "rawoutfile.tsv";
@@ -61,18 +53,14 @@ int main(int argc, char* argv[]){
     //setting up all the filters required
     Iir::Butterworth::HighPass<filterorder> eeg_filterHP;
     eeg_filterHP.setup(fs,eegHighpassCutOff);
-    Iir::Butterworth::BandStop<filterorder> eeg_filterBS;
-    eeg_filterBS.setup(fs,powerlineFrequ,bsBandwidth);
     Iir::Butterworth::HighPass<filterorder> ecg_filterHP;
     ecg_filterHP.setup(fs,ecgHighpassCutOff);
-    Iir::Butterworth::BandStop<filterorder> ecg_filterBS;
-    ecg_filterBS.setup(fs,powerlineFrequ,bsBandwidth);
 
     auto start = std::chrono::high_resolution_clock::now();
 
     dnf.setLearningRate(0);
     
-    for(int i=0; i < (250*60);i++) 
+    for(int i=0; i < (250*120);i++) 
 	{
 	    double t;
 	    double eeg;
@@ -81,15 +69,12 @@ int main(int argc, char* argv[]){
 	    nSamples++;
 
 	    eeg = eeg_filterHP.filter(eeg);
-	    eeg = eeg_filterBS.filter(eeg);
-
 	    ecg = ecg_filterHP.filter(ecg);
-	    ecg = ecg_filterBS.filter(ecg);
 
 	    ecg = ecg * 1000;
 	    eeg = eeg * 1000;
 
-	    if (i == nTapsDNF){
+	    if (i == (int)(fs*4)){
 		dnf.setLearningRate(dnf_learning_rate);
 	    }
 
