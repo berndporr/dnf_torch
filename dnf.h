@@ -68,7 +68,7 @@ public:
     struct Net : public torch::nn::Module {
 	std::vector<torch::nn::Linear> fc;
 	
-	Net(int nLayers, int nInput) {
+	Net(int nLayers, int nInput, bool withBias = false) {
 	    // calc an exp reduction of the numbers always reaching 1
 	    const float b = (float)exp(log(nInput)/(nLayers-1));
 	    int inputNeurons = nInput;
@@ -79,9 +79,12 @@ public:
 		sprintf(tmp,"fc%d_%d_%d",i,inputNeurons,outputNeurons);
 		if (debugOutput)
 		    fprintf(stderr,"Creating FC layer: %s\n",tmp);
-		torch::nn::Linear ll = register_module(tmp, torch::nn::Linear(inputNeurons, outputNeurons));
+		torch::nn::Linear ll = register_module(
+		    tmp,
+		    torch::nn::Linear(torch::nn::LinearOptions(inputNeurons, outputNeurons).bias(withBias))
+		    );
 		torch::nn::init::xavier_uniform_(ll->weight,xavierGain);
-		torch::nn::init::constant_(ll->bias, 0.0);
+		if (withBias) torch::nn::init::constant_(ll->bias, 0.0);
 		fc.push_back(ll);
 		if (1 == outputNeurons) break;
 		inputNeurons = outputNeurons;
@@ -133,8 +136,9 @@ public:
 	signal_delayLine.init(signalDelayLineLength);
 	noise_delayLine.init(noiseDelayLineLength);
 
-	torch::manual_seed(1);
-    
+	torch::manual_seed(42);
+
+	// todo: get it working on cuda
 	torch::DeviceType device_type;
 	if (false) /** torch::cuda::is_available()) **/ {
 	    std::cout << "CUDA available! Training on GPU." << std::endl;
@@ -150,6 +154,7 @@ public:
 	model->train();
 	
 	optimizer = new torch::optim::SGD(model->parameters(), 0);
+	saveInitialParameters();
     }
 
     void setLearningRate(float mu) {
@@ -210,15 +215,48 @@ public:
     }
 
     /**
-     * Todo: get the weight distance
+     * Gets the weight distances per layer
      **/
-    float getLayerWeightDistance(int layerIndex) {
-	return 0;
+    std::vector<float> getLayerWeightDistances() const {
+	return computeLayerDistances();
+    }
+
+    /**
+     * Gets the overall weight distsance
+     **/
+    float getWeightDistance() const {
+	auto dists = computeLayerDistances();
+	float dsum = 0;
+	for(const auto& dlayer : dists) {
+	    dsum = dsum + dlayer;
+	}
+	return dsum;
     }
     
 private:
-    Net* model = nullptr;
+
+    void saveInitialParameters() {
+	for (const auto& p : model->parameters()) {
+	    
+	    initialParameters.push_back(p.detach().clone());
+	}
+    }
+
+    std::vector<float> computeLayerDistances() const {
+	std::vector<float> distances;
+	int i = 0;
+	for (const auto& p : model->parameters()) {
+	    torch::Tensor diff = (p - initialParameters[i]).view(-1);
+	    torch::Tensor dist = torch::norm(diff, 2);
+	    distances.push_back(dist.item<float>());
+	    i++;
+	}
+	return distances;
+    }
+
+Net* model = nullptr;
     torch::optim::SGD* optimizer = nullptr;
+    std::vector<torch::Tensor> initialParameters;
     const int noiseDelayLineLength;
     const int signalDelayLineLength;
     const float fs;

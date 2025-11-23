@@ -20,7 +20,7 @@ using namespace std;
 
 // Integer of the total number of hidden layers
 // required not including the input layer
-const int NLAYERS = 5;
+const int NLAYERS = 3;
 
 // Number of taps of the delay line
 const int nTapsDNF = 100;
@@ -70,7 +70,9 @@ int main(int argc, char* argv[]){
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    for(int i=0;;i++) 
+    dnf.setLearningRate(0);
+    
+    for(int i=0; i < (250*60);i++) 
 	{
 	    double t;
 	    double eeg;
@@ -81,18 +83,22 @@ int main(int argc, char* argv[]){
 	    eeg = eeg_filterHP.filter(eeg);
 	    eeg = eeg_filterBS.filter(eeg);
 
-	    ecg = eeg_filterHP.filter(ecg);
-	    ecg = eeg_filterBS.filter(ecg);
+	    ecg = ecg_filterHP.filter(ecg);
+	    ecg = ecg_filterBS.filter(ecg);
 
-	    if (i > nTapsDNF){
+	    ecg = ecg * 1000;
+	    eeg = eeg * 1000;
+
+	    if (i == nTapsDNF){
 		dnf.setLearningRate(dnf_learning_rate);
-	    } else {
-		dnf.setLearningRate(0);
 	    }
 
 	    double f_nn = dnf.filter(eeg, ecg);
 
-	    fprintf(foutput,"%f\t%f\t%f\n",f_nn, eeg, ecg);
+	    fprintf(foutput,"%f\t%f\t%f",f_nn, dnf.getDelayedSignal(), dnf.getRemover());
+	    auto ds = dnf.getLayerWeightDistances();
+	    for(const auto& d : ds) fprintf(foutput,"\t%f",d);
+	    fprintf(foutput,"\n");
 	}
 
     auto elapsed = std::chrono::high_resolution_clock::now() - start;

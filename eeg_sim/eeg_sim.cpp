@@ -200,10 +200,11 @@ void runSimulation(const float duration,
 		} else {
 			dnf.setLearningRate(0);
 		}
-		
-		wdistance_file << 0;
-		for(int i=0; i < NLAYERS; i++ ) {
-			wdistance_file << "\t" << dnf.getLayerWeightDistance(i);
+
+		wdistance_file << dnf.getWeightDistance();
+		auto dists = dnf.getLayerWeightDistances();
+		for(const auto & d : dists) {
+			wdistance_file << "\t" << d;
 		}
 		wdistance_file << endl;
 
