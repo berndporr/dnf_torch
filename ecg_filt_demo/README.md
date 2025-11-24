@@ -19,7 +19,6 @@ which can then be used for more complex reference signals.
 python plot_results.py
 ```
 
-which plots the contents of `ecg_filtered.dat` which has
-five columns: `DNF output, input, noise reference,` and the weight distances.
+which plots the contents of `ecg_filtered.dat`.
 
 ![alt tag](screenshot.png)
