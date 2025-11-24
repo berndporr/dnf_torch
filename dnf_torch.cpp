@@ -85,17 +85,13 @@ float DNF::filter(const float signal, const float noise) {
     for(int i = 0; i < noiseDelayLineLength; i++) {
 	noiseTimeSeries[i] = noise_delayLine.get(i);
     }
-
-    // REMOVER OUTPUT FROM NETWORK
     noiseTimeSeries = noiseTimeSeries.to(device);
+
     torch::Tensor output = (model->forward(noiseTimeSeries,actMethod)).to(torch::kCPU);
-//    auto a = output.accessor<float,1>();
-//    remover = a[0];
     remover = output.item<float>();
-    
+
     f_nn = delayed_signal - remover;
     
-    // FEEDBACK TO THE NETWORK
     optimizer->zero_grad();
     torch::Tensor gradient = torch::tensor({-f_nn});
     output.retain_grad();
