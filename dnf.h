@@ -1,3 +1,9 @@
+/**
+ * License: GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+ * Copyright (c) 2020 by Bernd Porr
+ * Copyright (c) 2020 by Sama Daryanavard
+ **/
+
 #ifndef _DNF_H
 #define _DNF_H
 
@@ -251,7 +257,7 @@ private:
 	return distances;
     }
 
-Net* model = nullptr;
+    Net* model = nullptr;
     torch::optim::SGD* optimizer = nullptr;
     std::vector<torch::Tensor> initialParameters;
     const int noiseDelayLineLength;
