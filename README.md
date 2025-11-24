@@ -42,6 +42,10 @@ sudo make install
 
 [Simple instructional example which removes 50Hz from an ECG](ecg_filt_demo).
 
+## Documentation
+
+[Doxygen generated documentation](https://berndporr.github.io/dnf_torch/)
+
 ## Credits
 
  - Bernd Porr
