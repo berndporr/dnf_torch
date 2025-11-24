@@ -44,3 +44,8 @@ sudo make install
 
 Simple instructional example which removes 50Hz from an ECG:
 [Adaptive 50Hz remover](ecg_filt_demo).
+
+## Credits
+
+ - Bernd Porr
+ - Sama Daryanavard

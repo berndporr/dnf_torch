@@ -58,10 +58,7 @@ class DNF {
 public:
 
     /**
-     * Options for activation functions of the neuron
-     * 0 for using the logistic function
-     * 1 for using the hyperbolic tan function
-     * 2 for unity function (no activation)
+     * Options for activation functions of all neurons in the network.
      */
     enum ActMethod {Act_Sigmoid = 1, Act_Tanh = 2, Act_ReLU = 3, Act_NONE = 0};
 
