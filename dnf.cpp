@@ -10,9 +10,11 @@ float DNF::filter(const float signal, const float noise) {
     }
 
     // REMOVER OUTPUT FROM NETWORK
-    torch::Tensor output = model->forward(noiseTimeSeries,actMethod);
-    auto a = output.accessor<float,1>();
-    remover = a[0];
+    noiseTimeSeries = noiseTimeSeries.to(device);
+    torch::Tensor output = (model->forward(noiseTimeSeries,actMethod)).to(torch::kCPU);
+//    auto a = output.accessor<float,1>();
+//    remover = a[0];
+    remover = output.item<float>();
     
     f_nn = delayed_signal - remover;
     

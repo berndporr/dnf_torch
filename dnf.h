@@ -125,11 +125,13 @@ public:
      * \param nTaps Number of taps for the delay line feeding into the 1st layer
      * \param samplingrate Sampling rate of the signals used in Hz.
      * \param am The activation function for the neurons. Default is tanh.
+     * \param tryGPU Tries to do the learning on the GPU.
      **/
     DNF(const int nLayers,
 	const int nTaps,
 	const float samplingrate,
-	const ActMethod am = Act_Tanh
+	const ActMethod am = Act_Tanh,
+    const bool tryGPU = false
 	) : noiseDelayLineLength(nTaps),
 	    signalDelayLineLength(noiseDelayLineLength / 2),
 	    fs(samplingrate),
@@ -141,16 +143,12 @@ public:
 
 	torch::manual_seed(42);
 
-	// todo: get it working on cuda
 	torch::DeviceType device_type;
-	if (false) /** torch::cuda::is_available()) **/ {
-	    std::cout << "CUDA available! Training on GPU." << std::endl;
+	if (tryGPU && torch::cuda::is_available()) {
+	    std::cout << "CUDA available. Training on GPU." << std::endl;
 	    device_type = torch::kCUDA;
-	} else {
-	    std::cout << "Training on CPU." << std::endl;
-	    device_type = torch::kCPU;
+        device = torch::Device(device_type);
 	}
-	torch::Device device(device_type);
 
 	model = new Net(nLayers,nTaps);
 	model->to(device);
@@ -269,6 +267,7 @@ private:
     float remover = 0;
     float f_nn = 0;
     static constexpr double xavierGain = 0.01;
+	torch::Device device = torch::kCPU;
 };
 
 #endif

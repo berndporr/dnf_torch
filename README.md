@@ -1,7 +1,5 @@
 # Deep Neuronal Filter (DNF) -- libtorch version
 
-This is work in progress. Works only on CPU at the moment.
-
 ## Prerequisites Libraries and packages
 
 1) Install the IIR and FIR filter libraries
