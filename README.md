@@ -6,10 +6,8 @@
 
 2) Libtorch
 
-You can get libtorch from the [PyTorch homepage](https://pytorch.org/get-started/locally/).
-
-Add `CMAKE_PREFIX_PATH=/path/to/libtorch` pointing to the libtorch directory 
-as an environment variable.
+ - Intel architectures: Get libtorch from the [PyTorch homepage](https://pytorch.org/get-started/locally/). Add `CMAKE_PREFIX_PATH=/path/to/libtorch` pointing to the libtorch directory as an environment variable.
+ - ARM Debian (Raspberry PI): just do `apt install libtorch-dev` and you are all set!
 
 ## How to compile
 
