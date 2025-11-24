@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['filter_8',['filter',['../classDNF.html#afad03ec772b965aaeb4df388febc9c32',1,'DNF']]]
+  ['net_0',['Net',['../structDNF_1_1Net.html',1,'DNF']]],
+  ['neuronal_20filter_20dnf_1',['Deep Neuronal Filter (DNF)',['../index.html',1,'']]]
 ];

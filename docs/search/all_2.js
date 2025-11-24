@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['calcoutput_2',['calcOutput',['../classNeuron.html#a902db2a6fdb6e7e1787ccb617ab4f298',1,'Neuron']]],
-  ['calcoutputs_3',['calcOutputs',['../classLayer.html#a0b2f6b68f2c16cafb05727253bcfa1d9',1,'Layer']]]
+  ['filter_0',['filter',['../classDNF.html#a42f97624184f136324b094b6dba0cfb0',1,'DNF']]],
+  ['filter_20dnf_1',['Deep Neuronal Filter (DNF)',['../index.html',1,'']]]
 ];

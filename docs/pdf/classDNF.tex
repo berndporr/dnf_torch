@@ -1,5 +1,5 @@
-\hypertarget{classDNF}{}\doxysection{D\+NF Class Reference}
-\label{classDNF}\index{DNF@{DNF}}
+\doxysection{DNF Class Reference}
+\hypertarget{classDNF}{}\label{classDNF}\index{DNF@{DNF}}
 
 
 Main Deep Neuronal Network main class.  
@@ -9,26 +9,48 @@ Main Deep Neuronal Network main class.
 
 {\ttfamily \#include $<$dnf.\+h$>$}
 
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classDNF_a210a627d781f268df320c69cd121d52b}{D\+NF}} (const int N\+L\+A\+Y\+E\+RS, const int num\+Taps, double fs, \mbox{\hyperlink{classNeuron_a0149bf83d0c7497cb9bcf1153443302d}{Neuron\+::act\+Method}} am=Neuron\+::\+Act\+\_\+\+Tanh)
+struct \mbox{\hyperlink{structDNF_1_1Net}{Net}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classDNF_a73ba107ad8339d3107a753a2a424f296}\label{classDNF_a73ba107ad8339d3107a753a2a424f296} 
+enum \mbox{\hyperlink{classDNF_a73ba107ad8339d3107a753a2a424f296}{Act\+Method}} \{ {\bfseries Act\+\_\+\+Sigmoid} = 1
+, {\bfseries Act\+\_\+\+Tanh} = 2
+, {\bfseries Act\+\_\+\+Re\+LU} = 3
+, {\bfseries Act\+\_\+\+NONE} = 0
+ \}
+\begin{DoxyCompactList}\small\item\em Options for activation functions of all neurons in the network. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDNF_aa0a6a4321fc8e93e1a6407b9a72b66bd}{DNF}} (const int n\+Layers, const int n\+Taps, const float samplingrate, const \mbox{\hyperlink{classDNF_a73ba107ad8339d3107a753a2a424f296}{Act\+Method}} am=Act\+\_\+\+Tanh, const bool try\+GPU=false)
 \begin{DoxyCompactList}\small\item\em Constructor which sets up the delay lines, network layers and also calculates the number of neurons per layer so that the final layer always just has one neuron. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classDNF_afad03ec772b965aaeb4df388febc9c32}{filter}} (double signal, double noise)
+\Hypertarget{classDNF_a5ae21c3cf9a06aeb26ae28253a494fcf}\label{classDNF_a5ae21c3cf9a06aeb26ae28253a494fcf} 
+void {\bfseries set\+Learning\+Rate} (float mu)
+\item 
+float \mbox{\hyperlink{classDNF_a42f97624184f136324b094b6dba0cfb0}{filter}} (const float signal, const float noise)
 \begin{DoxyCompactList}\small\item\em Realtime sample by sample filtering operation. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classNet}{Net}} \& \mbox{\hyperlink{classDNF_a6a1c18586c06de51c5ae2b3a8877fbe1}{get\+Net}} () const
-\begin{DoxyCompactList}\small\item\em Returns a reference to the whole neural network. \end{DoxyCompactList}\item 
-const int \mbox{\hyperlink{classDNF_a2fe563bb0e8e6f5f4bb07396494bdc66}{get\+Signal\+Delay\+Steps}} () const
+int \mbox{\hyperlink{classDNF_a8323c9fd3bd4757124242b43fad72f98}{get\+Signal\+Delay\+Steps}} () const
 \begin{DoxyCompactList}\small\item\em Returns the length of the delay line which delays the signal polluted with noise. \end{DoxyCompactList}\item 
-const double \mbox{\hyperlink{classDNF_a2d95c8bc5df8f88ddcebc9720a2322e9}{get\+Delayed\+Signal}} () const
-\begin{DoxyCompactList}\small\item\em Returns the delayed with noise polluted signal by the delay indicated by \mbox{\hyperlink{classDNF_a2fe563bb0e8e6f5f4bb07396494bdc66}{get\+Signal\+Delay\+Steps()}}. \end{DoxyCompactList}\item 
-const double \mbox{\hyperlink{classDNF_a628b03f76c8a0e40ea191edf53888d2f}{get\+Remover}} () const
+float \mbox{\hyperlink{classDNF_afe4ca00a5c6f304ac24cf0ae2ec0dd34}{get\+Delayed\+Signal}} () const
+\begin{DoxyCompactList}\small\item\em Returns the delayed with noise polluted signal by the delay indicated by \doxylink{classDNF_a8323c9fd3bd4757124242b43fad72f98}{get\+Signal\+Delay\+Steps()}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classDNF_aad961eded5bd6616323ad6eb562294c2}{get\+Remover}} () const
 \begin{DoxyCompactList}\small\item\em Returns the remover signal. \end{DoxyCompactList}\item 
-const double \mbox{\hyperlink{classDNF_a9e84e861919b98c56d910b90ccb9b398}{get\+Output}} () const
-\begin{DoxyCompactList}\small\item\em Returns the output of the \mbox{\hyperlink{classDNF}{D\+NF}}\+: the the noise free signal. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classDNF_ab7ca529281584cc9c5689527155e2e72}\label{classDNF_ab7ca529281584cc9c5689527155e2e72}} 
-\mbox{\hyperlink{classDNF_ab7ca529281584cc9c5689527155e2e72}{$\sim$\+D\+NF}} ()
-\begin{DoxyCompactList}\small\item\em Frees the memory used by the \mbox{\hyperlink{classDNF}{D\+NF}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+float \mbox{\hyperlink{classDNF_a1cb9c612383fc04383a1d8d3585e3ba3}{get\+Output}} () const
+\begin{DoxyCompactList}\small\item\em Returns the output of the \doxylink{classDNF}{DNF}\+: the the noise free signal. \end{DoxyCompactList}\item 
+\Hypertarget{classDNF_ab7ca529281584cc9c5689527155e2e72}\label{classDNF_ab7ca529281584cc9c5689527155e2e72} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+DNF} ()
+\begin{DoxyCompactList}\small\item\em Frees the memory used by the \doxylink{classDNF}{DNF}. \end{DoxyCompactList}\item 
+\Hypertarget{classDNF_aeb6e5b55bbd310a1152b4e39fc6855b1}\label{classDNF_aeb6e5b55bbd310a1152b4e39fc6855b1} 
+std\+::vector$<$ float $>$ {\bfseries get\+Layer\+Weight\+Distances} () const
+\begin{DoxyCompactList}\small\item\em Gets the weight distances per layer. \end{DoxyCompactList}\item 
+\Hypertarget{classDNF_a533c774412b0d608333cfb2840bc9990}\label{classDNF_a533c774412b0d608333cfb2840bc9990} 
+float {\bfseries get\+Weight\+Distance} () const
+\begin{DoxyCompactList}\small\item\em Gets the overall weight distsance. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -37,11 +59,11 @@ Main Deep Neuronal Network main class.
 It\textquotesingle{}s designed to be as simple as possible with only a few parameters as possible. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classDNF_a210a627d781f268df320c69cd121d52b}\label{classDNF_a210a627d781f268df320c69cd121d52b}} 
+\Hypertarget{classDNF_aa0a6a4321fc8e93e1a6407b9a72b66bd}\label{classDNF_aa0a6a4321fc8e93e1a6407b9a72b66bd} 
 \index{DNF@{DNF}!DNF@{DNF}}
 \index{DNF@{DNF}!DNF@{DNF}}
 \doxysubsubsection{\texorpdfstring{DNF()}{DNF()}}
-{\footnotesize\ttfamily D\+N\+F\+::\+D\+NF (\begin{DoxyParamCaption}\item[{const int}]{N\+L\+A\+Y\+E\+RS,  }\item[{const int}]{num\+Taps,  }\item[{double}]{fs,  }\item[{\mbox{\hyperlink{classNeuron_a0149bf83d0c7497cb9bcf1153443302d}{Neuron\+::act\+Method}}}]{am = {\ttfamily Neuron\+:\+:Act\+\_\+Tanh} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily DNF\+::\+DNF (\begin{DoxyParamCaption}\item[{const int}]{n\+Layers,  }\item[{const int}]{n\+Taps,  }\item[{const float}]{samplingrate,  }\item[{const \mbox{\hyperlink{classDNF_a73ba107ad8339d3107a753a2a424f296}{Act\+Method}}}]{am = {\ttfamily Act\+\_\+Tanh},  }\item[{const bool}]{try\+GPU = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -49,23 +71,25 @@ Constructor which sets up the delay lines, network layers and also calculates th
 
 
 \begin{DoxyParams}{Parameters}
-{\em N\+L\+A\+Y\+E\+RS} & Number of layers \\
+{\em n\+Layers} & Number of layers \\
 \hline
-{\em num\+Taps} & Number of taps for the delay line feeding into the 1st layer \\
+{\em n\+Taps} & Number of taps for the delay line feeding into the 1st layer \\
 \hline
-{\em fs} & Sampling rate of the signals used in Hz. \\
+{\em samplingrate} & Sampling rate of the signals used in Hz. \\
 \hline
 {\em am} & The activation function for the neurons. Default is tanh. \\
+\hline
+{\em try\+GPU} & Tries to do the learning on the GPU. \\
 \hline
 \end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classDNF_afad03ec772b965aaeb4df388febc9c32}\label{classDNF_afad03ec772b965aaeb4df388febc9c32}} 
+\Hypertarget{classDNF_a42f97624184f136324b094b6dba0cfb0}\label{classDNF_a42f97624184f136324b094b6dba0cfb0} 
 \index{DNF@{DNF}!filter@{filter}}
 \index{filter@{filter}!DNF@{DNF}}
 \doxysubsubsection{\texorpdfstring{filter()}{filter()}}
-{\footnotesize\ttfamily double D\+N\+F\+::filter (\begin{DoxyParamCaption}\item[{double}]{signal,  }\item[{double}]{noise }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily float DNF\+::filter (\begin{DoxyParamCaption}\item[{const float}]{signal,  }\item[{const float}]{noise }\end{DoxyParamCaption})}
 
 
 
@@ -79,52 +103,39 @@ Realtime sample by sample filtering operation.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-The filtered signal where the noise has been removed by the \mbox{\hyperlink{classDNF}{D\+NF}}. 
+The filtered signal where the noise has been removed by the \doxylink{classDNF}{DNF}. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classDNF_a2d95c8bc5df8f88ddcebc9720a2322e9}\label{classDNF_a2d95c8bc5df8f88ddcebc9720a2322e9}} 
+\Hypertarget{classDNF_afe4ca00a5c6f304ac24cf0ae2ec0dd34}\label{classDNF_afe4ca00a5c6f304ac24cf0ae2ec0dd34} 
 \index{DNF@{DNF}!getDelayedSignal@{getDelayedSignal}}
 \index{getDelayedSignal@{getDelayedSignal}!DNF@{DNF}}
 \doxysubsubsection{\texorpdfstring{getDelayedSignal()}{getDelayedSignal()}}
-{\footnotesize\ttfamily const double D\+N\+F\+::get\+Delayed\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily float DNF\+::get\+Delayed\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Returns the delayed with noise polluted signal by the delay indicated by \mbox{\hyperlink{classDNF_a2fe563bb0e8e6f5f4bb07396494bdc66}{get\+Signal\+Delay\+Steps()}}. 
+Returns the delayed with noise polluted signal by the delay indicated by \doxylink{classDNF_a8323c9fd3bd4757124242b43fad72f98}{get\+Signal\+Delay\+Steps()}. 
 
 \begin{DoxyReturn}{Returns}
 The delayed noise polluted signal sample. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classDNF_a6a1c18586c06de51c5ae2b3a8877fbe1}\label{classDNF_a6a1c18586c06de51c5ae2b3a8877fbe1}} 
-\index{DNF@{DNF}!getNet@{getNet}}
-\index{getNet@{getNet}!DNF@{DNF}}
-\doxysubsubsection{\texorpdfstring{getNet()}{getNet()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classNet}{Net}}\& D\+N\+F\+::get\+Net (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Returns a reference to the whole neural network. 
-
-\begin{DoxyReturn}{Returns}
-A reference to \mbox{\hyperlink{classNet}{Net}}. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{classDNF_a9e84e861919b98c56d910b90ccb9b398}\label{classDNF_a9e84e861919b98c56d910b90ccb9b398}} 
+\Hypertarget{classDNF_a1cb9c612383fc04383a1d8d3585e3ba3}\label{classDNF_a1cb9c612383fc04383a1d8d3585e3ba3} 
 \index{DNF@{DNF}!getOutput@{getOutput}}
 \index{getOutput@{getOutput}!DNF@{DNF}}
 \doxysubsubsection{\texorpdfstring{getOutput()}{getOutput()}}
-{\footnotesize\ttfamily const double D\+N\+F\+::get\+Output (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily float DNF\+::get\+Output (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Returns the output of the \mbox{\hyperlink{classDNF}{D\+NF}}\+: the the noise free signal. 
+Returns the output of the \doxylink{classDNF}{DNF}\+: the the noise free signal. 
 
 \begin{DoxyReturn}{Returns}
-The current output of the \mbox{\hyperlink{classDNF}{D\+NF}} which is idential to \mbox{\hyperlink{classDNF_afad03ec772b965aaeb4df388febc9c32}{filter()}}. 
+The current output of the \doxylink{classDNF}{DNF} which is idential to \doxylink{classDNF_a42f97624184f136324b094b6dba0cfb0}{filter()}. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classDNF_a628b03f76c8a0e40ea191edf53888d2f}\label{classDNF_a628b03f76c8a0e40ea191edf53888d2f}} 
+\Hypertarget{classDNF_aad961eded5bd6616323ad6eb562294c2}\label{classDNF_aad961eded5bd6616323ad6eb562294c2} 
 \index{DNF@{DNF}!getRemover@{getRemover}}
 \index{getRemover@{getRemover}!DNF@{DNF}}
 \doxysubsubsection{\texorpdfstring{getRemover()}{getRemover()}}
-{\footnotesize\ttfamily const double D\+N\+F\+::get\+Remover (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily float DNF\+::get\+Remover (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -133,11 +144,11 @@ Returns the remover signal.
 \begin{DoxyReturn}{Returns}
 The current remover signal sample. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classDNF_a2fe563bb0e8e6f5f4bb07396494bdc66}\label{classDNF_a2fe563bb0e8e6f5f4bb07396494bdc66}} 
+\Hypertarget{classDNF_a8323c9fd3bd4757124242b43fad72f98}\label{classDNF_a8323c9fd3bd4757124242b43fad72f98} 
 \index{DNF@{DNF}!getSignalDelaySteps@{getSignalDelaySteps}}
 \index{getSignalDelaySteps@{getSignalDelaySteps}!DNF@{DNF}}
 \doxysubsubsection{\texorpdfstring{getSignalDelaySteps()}{getSignalDelaySteps()}}
-{\footnotesize\ttfamily const int D\+N\+F\+::get\+Signal\+Delay\+Steps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily int DNF\+::get\+Signal\+Delay\+Steps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
