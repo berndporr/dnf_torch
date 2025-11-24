@@ -87,13 +87,13 @@ float DNF::filter(const float signal, const float noise) {
     }
     noiseTimeSeries = noiseTimeSeries.to(device);
 
-    torch::Tensor output = (model->forward(noiseTimeSeries,actMethod)).to(torch::kCPU);
-    remover = output.item<float>();
+    torch::Tensor output = (model->forward(noiseTimeSeries,actMethod));
+    remover = output.to(torch::kCPU).item<float>();
 
     f_nn = delayed_signal - remover;
     
     optimizer->zero_grad();
-    torch::Tensor gradient = torch::tensor({-f_nn});
+    torch::Tensor gradient = torch::tensor({-f_nn}).to(device);
     output.retain_grad();
     output.backward(gradient);
     optimizer->step();
