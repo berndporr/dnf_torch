@@ -98,16 +98,11 @@ $(document).ready(function(){initNavTree('classDNF.html',''); initResizable(); }
 </div><!--header-->
 <div class="contents">
 
-<p>Main Deep Neuronal Network main class.  
+<p>Deep Neuronal Filter class.  
  <a href="classDNF.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="dnf_8h_source.html">dnf.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="dnf__torch_8h_source.html">dnf_torch.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDNF_1_1Net.html">Net</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a73ba107ad8339d3107a753a2a424f296" id="r_a73ba107ad8339d3107a753a2a424f296"><td class="memItemLeft" align="right" valign="top"><a id="a73ba107ad8339d3107a753a2a424f296" name="a73ba107ad8339d3107a753a2a424f296"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDNF.html#a73ba107ad8339d3107a753a2a424f296">ActMethod</a> { <b>Act_Sigmoid</b> = 1
@@ -139,23 +134,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLearningRate</b> (
 <tr class="memdesc:aad961eded5bd6616323ad6eb562294c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the remover signal.  <br /></td></tr>
 <tr class="separator:aad961eded5bd6616323ad6eb562294c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cb9c612383fc04383a1d8d3585e3ba3" id="r_a1cb9c612383fc04383a1d8d3585e3ba3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDNF.html#a1cb9c612383fc04383a1d8d3585e3ba3">getOutput</a> () const</td></tr>
-<tr class="memdesc:a1cb9c612383fc04383a1d8d3585e3ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the output of the <a class="el" href="classDNF.html" title="Main Deep Neuronal Network main class.">DNF</a>: the the noise free signal.  <br /></td></tr>
+<tr class="memdesc:a1cb9c612383fc04383a1d8d3585e3ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the output of the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a>: the the noise free signal.  <br /></td></tr>
 <tr class="separator:a1cb9c612383fc04383a1d8d3585e3ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7ca529281584cc9c5689527155e2e72" id="r_ab7ca529281584cc9c5689527155e2e72"><td class="memItemLeft" align="right" valign="top"><a id="ab7ca529281584cc9c5689527155e2e72" name="ab7ca529281584cc9c5689527155e2e72"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~DNF</b> ()</td></tr>
-<tr class="memdesc:ab7ca529281584cc9c5689527155e2e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory used by the <a class="el" href="classDNF.html" title="Main Deep Neuronal Network main class.">DNF</a>. <br /></td></tr>
+<tr class="memdesc:ab7ca529281584cc9c5689527155e2e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory used by the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a>. <br /></td></tr>
 <tr class="separator:ab7ca529281584cc9c5689527155e2e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb6e5b55bbd310a1152b4e39fc6855b1" id="r_aeb6e5b55bbd310a1152b4e39fc6855b1"><td class="memItemLeft" align="right" valign="top"><a id="aeb6e5b55bbd310a1152b4e39fc6855b1" name="aeb6e5b55bbd310a1152b4e39fc6855b1"></a>
-std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getLayerWeightDistances</b> () const</td></tr>
-<tr class="memdesc:aeb6e5b55bbd310a1152b4e39fc6855b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the weight distances per layer. <br /></td></tr>
+<tr class="memitem:aeb6e5b55bbd310a1152b4e39fc6855b1" id="r_aeb6e5b55bbd310a1152b4e39fc6855b1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDNF.html#aeb6e5b55bbd310a1152b4e39fc6855b1">getLayerWeightDistances</a> () const</td></tr>
+<tr class="memdesc:aeb6e5b55bbd310a1152b4e39fc6855b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the weight distances per layer.  <br /></td></tr>
 <tr class="separator:aeb6e5b55bbd310a1152b4e39fc6855b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a533c774412b0d608333cfb2840bc9990" id="r_a533c774412b0d608333cfb2840bc9990"><td class="memItemLeft" align="right" valign="top"><a id="a533c774412b0d608333cfb2840bc9990" name="a533c774412b0d608333cfb2840bc9990"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>getWeightDistance</b> () const</td></tr>
-<tr class="memdesc:a533c774412b0d608333cfb2840bc9990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the overall weight distsance. <br /></td></tr>
+<tr class="memitem:a533c774412b0d608333cfb2840bc9990" id="r_a533c774412b0d608333cfb2840bc9990"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDNF.html#a533c774412b0d608333cfb2840bc9990">getWeightDistance</a> () const</td></tr>
+<tr class="memdesc:a533c774412b0d608333cfb2840bc9990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the overall weight distsance.  <br /></td></tr>
 <tr class="separator:a533c774412b0d608333cfb2840bc9990"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Main Deep Neuronal Network main class. </p>
+<div class="textblock"><p>Deep Neuronal Filter class. </p>
 <p>It's designed to be as simple as possible with only a few parameters as possible. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa0a6a4321fc8e93e1a6407b9a72b66bd" name="aa0a6a4321fc8e93e1a6407b9a72b66bd"></a>
@@ -163,9 +156,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getWeightDistance</b
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">DNF::DNF </td>
@@ -203,11 +193,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getWeightDistance</b
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Constructor which sets up the delay lines, network layers and also calculates the number of neurons per layer so that the final layer always just has one neuron. </p>
@@ -259,7 +244,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getWeightDistance</b
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The filtered signal where the noise has been removed by the <a class="el" href="classDNF.html" title="Main Deep Neuronal Network main class.">DNF</a>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The filtered signal where the noise has been removed by the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a>. </dd></dl>
 
 </div>
 </div>
@@ -291,6 +276,26 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getWeightDistance</b
 
 </div>
 </div>
+<a id="aeb6e5b55bbd310a1152b4e39fc6855b1" name="aeb6e5b55bbd310a1152b4e39fc6855b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb6e5b55bbd310a1152b4e39fc6855b1">&#9670;&#160;</a></span>getLayerWeightDistances()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; float &gt; DNF::getLayerWeightDistances </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the weight distances per layer. </p>
+<dl class="section return"><dt>Returns</dt><dd>The Eucledian weight distance in relation to the initial weights. </dd></dl>
+
+</div>
+</div>
 <a id="a1cb9c612383fc04383a1d8d3585e3ba3" name="a1cb9c612383fc04383a1d8d3585e3ba3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1cb9c612383fc04383a1d8d3585e3ba3">&#9670;&#160;</a></span>getOutput()</h2>
 
@@ -314,8 +319,8 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getWeightDistance</b
 </table>
 </div><div class="memdoc">
 
-<p>Returns the output of the <a class="el" href="classDNF.html" title="Main Deep Neuronal Network main class.">DNF</a>: the the noise free signal. </p>
-<dl class="section return"><dt>Returns</dt><dd>The current output of the <a class="el" href="classDNF.html" title="Main Deep Neuronal Network main class.">DNF</a> which is idential to <a class="el" href="classDNF.html#a42f97624184f136324b094b6dba0cfb0" title="Realtime sample by sample filtering operation.">filter()</a>. </dd></dl>
+<p>Returns the output of the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a>: the the noise free signal. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current output of the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a> which is idential to <a class="el" href="classDNF.html#a42f97624184f136324b094b6dba0cfb0" title="Realtime sample by sample filtering operation.">filter()</a>. </dd></dl>
 
 </div>
 </div>
@@ -375,8 +380,28 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>getWeightDistance</b
 
 </div>
 </div>
+<a id="a533c774412b0d608333cfb2840bc9990" name="a533c774412b0d608333cfb2840bc9990"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a533c774412b0d608333cfb2840bc9990">&#9670;&#160;</a></span>getWeightDistance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float DNF::getWeightDistance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the overall weight distsance. </p>
+<dl class="section return"><dt>Returns</dt><dd>The sum of all layer weight distances. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="dnf_8h_source.html">dnf.h</a></li>
+<li><a class="el" href="dnf__torch_8h_source.html">dnf_torch.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

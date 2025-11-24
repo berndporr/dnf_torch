@@ -1,6 +1,5 @@
 var classDNF =
 [
-    [ "Net", "structDNF_1_1Net.html", null ],
     [ "ActMethod", "classDNF.html#a73ba107ad8339d3107a753a2a424f296", [
       [ "Act_Sigmoid", "classDNF.html#a73ba107ad8339d3107a753a2a424f296a8b2debcad8db451f668d85cc8bfc9fd7", null ],
       [ "Act_Tanh", "classDNF.html#a73ba107ad8339d3107a753a2a424f296ad02e12ae0e6a0a2bc449c1c4d73cd69e", null ],

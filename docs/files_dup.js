@@ -1,4 +1,4 @@
 var files_dup =
 [
-    [ "dnf.h", "dnf_8h_source.html", null ]
+    [ "dnf_torch.h", "dnf__torch_8h_source.html", null ]
 ];
