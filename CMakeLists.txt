@@ -8,10 +8,8 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
-find_package(Boost REQUIRED)
 find_package(Torch REQUIRED)
 
-include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TORCH_INCLUDE_DIRS})
 
 include(GNUInstallDirs)
