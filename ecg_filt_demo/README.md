@@ -20,8 +20,6 @@ python plot_results.py
 ```
 
 which plots the contents of `ecg_filtered.dat` which has
-three columns: `DNF output, input, noise reference`. By default
-the script plots the output of the filter but you can specify
-as an argument another column.
+five columns: `DNF output, input, noise reference,` and the weight distances.
 
 ![alt tag](screenshot.png)
