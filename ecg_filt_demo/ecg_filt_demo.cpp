@@ -42,6 +42,10 @@ const char inputFilename[] = "ecg50hz.dat";
 const char outputFilename[] = "ecg_filtered.dat";
 
 int main(int argc, char* argv[]){
+    bool tryCUDA = false;
+    if (argc > 1) {
+	tryCUDA = atoi(argv[1]) == 1;
+    }
     fprintf(stderr, "Reading noisy ECG file: %s.\n",inputFilename);
 
     FILE *finput = fopen(inputFilename,"rt");
@@ -50,7 +54,7 @@ int main(int argc, char* argv[]){
     double norm_noise_f = noise_f / fs;
     int nSamples = 0;
 
-    DNF dnf(NLAYERS,nTapsDNF,fs,ACTIVATION);
+    DNF dnf(NLAYERS,nTapsDNF,fs,ACTIVATION,tryCUDA);
 
     auto start = std::chrono::high_resolution_clock::now();
 
