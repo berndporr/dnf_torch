@@ -24,4 +24,4 @@ three columns: `DNF output, input, noise reference`. By default
 the script plots the output of the filter but you can specify
 as an argument another column.
 
-![alt tag](result.png)
+![alt tag](screenshot.png)

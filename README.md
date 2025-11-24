@@ -1,6 +1,6 @@
 # Deep Neuronal Filter (DNF) -- libtorch version
 
-This is work in progress.
+This is work in progress. Works only on CPU at the moment.
 
 ## Prerequisites Libraries and packages
 
@@ -14,6 +14,11 @@ Installation instructions are in these repositories:
 2) Make sure you have `cmake` installed.
 
 3) Libtorch
+
+You can get libtorch from the [PyTorch homepage](https://pytorch.org/get-started/locally/).
+
+Add `CMAKE_PREFIX_PATH=/path/to/libtorch` pointing to the libtorch directory 
+as an environment variable.
 
 ## How to compile
 
@@ -34,3 +39,8 @@ to compile the library and the demos.
 ```
 sudo make install
 ```
+
+## Example
+
+Simple instructional example which removes 50Hz from an ECG:
+[Adaptive 50Hz remover](ecg_filt_demo).
