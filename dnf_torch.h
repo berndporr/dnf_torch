@@ -24,39 +24,34 @@ const bool debugOutput = true;
 
 class DelayLine {
 public:
-    void init(size_t delaySamples)
-    {
+    void init(int delaySamples) {
         delaySamples_ = delaySamples;
         buffer_ = std::deque<float>(delaySamples_, 0.0f);
     }
-
-    float process(float input) {
-        // Output is the oldest value (front of deque)
+    
+    inline float process(float input) {
         float output = buffer_.front();
         buffer_.pop_front();
-	
-        // Push new input to the back
         buffer_.push_back(input);
-
         return output;
     }
-
+    
     float get(int i) const {
 	return buffer_[i];
     }
-
+    
     float getNewest() const {
 	return buffer_.back();
     }
-
+    
 private:
-    size_t delaySamples_ = 0;
+    int delaySamples_ = 0;
     std::deque<float> buffer_;
 };
 
 
 /**
- * Main Deep Neuronal Network main class.
+ * Deep Neuronal Filter class.
  * It's designed to be as simple as possible with
  * only a few parameters as possible.
  **/
@@ -68,55 +63,14 @@ public:
      */
     enum ActMethod {Act_Sigmoid = 1, Act_Tanh = 2, Act_ReLU = 3, Act_NONE = 0};
 
+private:
     struct Net : public torch::nn::Module {
 	std::vector<torch::nn::Linear> fc;
-	
-	Net(int nLayers, int nInput, bool withBias = false) {
-	    // calc an exp reduction of the numbers always reaching 1
-	    const float b = (float)exp(log(nInput)/(nLayers-1));
-	    int inputNeurons = nInput;
-	    for(int i=1;i<nLayers;i++) {
-		int outputNeurons = (int)ceil(nInput / pow(b,i));
-		if (i == (nLayers-1)) outputNeurons = 1;
-		char tmp[256];
-		sprintf(tmp,"fc%d_%d_%d",i,inputNeurons,outputNeurons);
-		if (debugOutput)
-		    fprintf(stderr,"Creating FC layer: %s\n",tmp);
-		torch::nn::Linear ll = register_module(
-		    tmp,
-		    torch::nn::Linear(torch::nn::LinearOptions(inputNeurons, outputNeurons).bias(withBias))
-		    );
-		torch::nn::init::xavier_uniform_(ll->weight,xavierGain);
-		if (withBias) torch::nn::init::constant_(ll->bias, 0.0);
-		fc.push_back(ll);
-		if (1 == outputNeurons) break;
-		inputNeurons = outputNeurons;
-	    }
-	}
-
-	torch::Tensor forward(torch::Tensor x, ActMethod am) {
-	    for(auto& f:fc) {
-		switch (am) {
-		default:
-		case Act_Tanh:
-		    x = torch::atan(f->forward(x));
-		    break;
-		case Act_Sigmoid:
-		    x = torch::sigmoid(f->forward(x));
-		    break;
-		case Act_ReLU:
-		    x = torch::relu(f->forward(x));
-		    break;
-		case Act_NONE:
-		    x = f->forward(x);
-		    break;
-		}
-	    }
-	    return x;
-	}
-
+	Net(int nLayers, int nInput, bool withBias = false);
+	torch::Tensor forward(torch::Tensor x, ActMethod am);
     };
 
+public:
     /**
      * Constructor which sets up the delay lines, network layers
      * and also calculates the number of neurons per layer so
@@ -131,34 +85,10 @@ public:
 	const int nTaps,
 	const float samplingrate,
 	const ActMethod am = Act_Tanh,
-    const bool tryGPU = false
-	) : noiseDelayLineLength(nTaps),
-	    signalDelayLineLength(noiseDelayLineLength / 2),
-	    fs(samplingrate),
-	    actMethod(am)
-	{
+	const bool tryGPU = false
+	);
 
-	signal_delayLine.init(signalDelayLineLength);
-	noise_delayLine.init(noiseDelayLineLength);
-
-	torch::manual_seed(42);
-
-	torch::DeviceType device_type;
-	if (tryGPU && torch::cuda::is_available()) {
-	    std::cout << "CUDA available. Training on GPU." << std::endl;
-	    device_type = torch::kCUDA;
-        device = torch::Device(device_type);
-	}
-
-	model = new Net(nLayers,nTaps);
-	model->to(device);
-	model->train();
-	
-	optimizer = new torch::optim::SGD(model->parameters(), 0);
-	saveInitialParameters();
-    }
-
-    void setLearningRate(float mu) {
+    inline void setLearningRate(float mu) {
 	for (auto& group : optimizer->param_groups()) {
             static_cast<torch::optim::SGDOptions&>(group.options()).lr(mu);
         }
@@ -217,42 +147,22 @@ public:
 
     /**
      * Gets the weight distances per layer
+     * \returns The Eucledian weight distance in relation to the initial weights.
      **/
-    std::vector<float> getLayerWeightDistances() const {
-	return computeLayerDistances();
-    }
+    std::vector<float> getLayerWeightDistances() const;
 
     /**
      * Gets the overall weight distsance
+     * \returns The sum of all layer weight distances.
      **/
-    float getWeightDistance() const {
-	auto dists = computeLayerDistances();
-	float dsum = 0;
-	for(const auto& dlayer : dists) {
-	    dsum = dsum + dlayer;
-	}
-	return dsum;
-    }
+    float getWeightDistance() const;
     
 private:
 
     void saveInitialParameters() {
-	for (const auto& p : model->parameters()) {
-	    
+	for (const auto& p : model->parameters()) { 
 	    initialParameters.push_back(p.detach().clone());
 	}
-    }
-
-    std::vector<float> computeLayerDistances() const {
-	std::vector<float> distances;
-	int i = 0;
-	for (const auto& p : model->parameters()) {
-	    torch::Tensor diff = (p - initialParameters[i]).view(-1);
-	    torch::Tensor dist = torch::norm(diff, 2);
-	    distances.push_back(dist.item<float>());
-	    i++;
-	}
-	return distances;
     }
 
     Net* model = nullptr;

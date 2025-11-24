@@ -7,4 +7,4 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 add_executable(ecg_filt_demo ecg_filt_demo.cpp)
-target_link_libraries(ecg_filt_demo dnf)
+target_link_libraries(ecg_filt_demo dnf_torch)

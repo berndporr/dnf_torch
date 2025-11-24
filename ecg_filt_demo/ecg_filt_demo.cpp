@@ -11,7 +11,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-#include "dnf.h"
+#include "dnf_torch.h"
 
 
 using namespace std; 
