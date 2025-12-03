@@ -17,9 +17,9 @@
 #include <deque>
 
 #ifdef NDEBUG
-const bool debugOutput = false;
+constexpr bool debugOutput = false;
 #else
-const bool debugOutput = true;
+constexpr bool debugOutput = true;
 #endif
 
 class DelayLine {
@@ -53,14 +53,14 @@ private:
 /**
  * Deep Neuronal Filter class.
  * It's designed to be as simple as possible with
- * only a few parameters as possible.
+ * only a few parameters.
  **/
 class DNF {
 public:
 
     /**
      * Options for activation functions of all neurons in the network.
-     */
+     **/
     enum ActMethod {Act_Sigmoid = 1, Act_Tanh = 2, Act_ReLU = 3, Act_NONE = 0};
 
 private:
@@ -79,7 +79,7 @@ public:
      * \param nTaps Number of taps for the delay line feeding into the 1st layer
      * \param samplingrate Sampling rate of the signals used in Hz.
      * \param am The activation function for the neurons. Default is tanh.
-     * \param tryGPU Tries to do the learning on the GPU.
+     * \param tryGPU Does the learning on the GPU if available.
      **/
     DNF(const int nLayers,
 	const int nTaps,
@@ -129,7 +129,7 @@ public:
     }
     
     /**
-     * Returns the output of the DNF: the the noise
+     * Returns the output of the DNF: the noise
      * free signal.
      * \returns The current output of the DNF which is idential to filter().
      **/
