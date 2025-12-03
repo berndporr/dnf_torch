@@ -134,7 +134,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLearningRate</b> (
 <tr class="memdesc:aad961eded5bd6616323ad6eb562294c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the remover signal.  <br /></td></tr>
 <tr class="separator:aad961eded5bd6616323ad6eb562294c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cb9c612383fc04383a1d8d3585e3ba3" id="r_a1cb9c612383fc04383a1d8d3585e3ba3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDNF.html#a1cb9c612383fc04383a1d8d3585e3ba3">getOutput</a> () const</td></tr>
-<tr class="memdesc:a1cb9c612383fc04383a1d8d3585e3ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the output of the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a>: the the noise free signal.  <br /></td></tr>
+<tr class="memdesc:a1cb9c612383fc04383a1d8d3585e3ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the output of the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a>: the noise free signal.  <br /></td></tr>
 <tr class="separator:a1cb9c612383fc04383a1d8d3585e3ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7ca529281584cc9c5689527155e2e72" id="r_ab7ca529281584cc9c5689527155e2e72"><td class="memItemLeft" align="right" valign="top"><a id="ab7ca529281584cc9c5689527155e2e72" name="ab7ca529281584cc9c5689527155e2e72"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~DNF</b> ()</td></tr>
@@ -149,7 +149,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLearningRate</b> (
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Deep Neuronal Filter class. </p>
-<p>It's designed to be as simple as possible with only a few parameters as possible. </p>
+<p>It's designed to be as simple as possible with only a few parameters. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa0a6a4321fc8e93e1a6407b9a72b66bd" name="aa0a6a4321fc8e93e1a6407b9a72b66bd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa0a6a4321fc8e93e1a6407b9a72b66bd">&#9670;&#160;</a></span>DNF()</h2>
@@ -202,7 +202,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLearningRate</b> (
     <tr><td class="paramname">nTaps</td><td>Number of taps for the delay line feeding into the 1st layer </td></tr>
     <tr><td class="paramname">samplingrate</td><td>Sampling rate of the signals used in Hz. </td></tr>
     <tr><td class="paramname">am</td><td>The activation function for the neurons. Default is tanh. </td></tr>
-    <tr><td class="paramname">tryGPU</td><td>Tries to do the learning on the GPU. </td></tr>
+    <tr><td class="paramname">tryGPU</td><td>Does the learning on the GPU if available. </td></tr>
   </table>
   </dd>
 </dl>
@@ -319,7 +319,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLearningRate</b> (
 </table>
 </div><div class="memdoc">
 
-<p>Returns the output of the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a>: the the noise free signal. </p>
+<p>Returns the output of the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a>: the noise free signal. </p>
 <dl class="section return"><dt>Returns</dt><dd>The current output of the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a> which is idential to <a class="el" href="classDNF.html#a42f97624184f136324b094b6dba0cfb0" title="Realtime sample by sample filtering operation.">filter()</a>. </dd></dl>
 
 </div>

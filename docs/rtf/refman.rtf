@@ -145,7 +145,7 @@ Deep Neuronal Filter (DNF)\par \pard\plain
 {\bkmkend AAAAAAAAAT}
  Libtorch version\par
 {\f2 https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0277974}\par
-A noise reduction filter using deep networks in autoencoder configuration. \par
+A realtime noise reduction filter using deep networks in autoencoder configuration. \par
 }}
 
 \pard\plain \sect\sbkpage
@@ -301,7 +301,7 @@ Returns the remover signal. }{
 float {\b getOutput} () const\par
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Returns the output of the {\b DNF}: the the noise free signal. }{
+Returns the output of the {\b DNF}: the noise free signal. }{
 }\par
 }\par}
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
@@ -339,7 +339,7 @@ Deep Neuronal Filter class. \par
 }
 
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-It's designed to be as simple as possible with only a few parameters as possible. \par
+It's designed to be as simple as possible with only a few parameters. \par
 }}
 {\pard\widctlpar\brdrb\brdrs\brdrw5\brsp20 \adjustright \par}
 \pard\plain \s3\sb240\sa60\keepn\widctlpar\adjustright \b\f1\cgrid 
@@ -391,7 +391,7 @@ Parameters\par}
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i tryGPU} \cell }{Tries to do the learning on the GPU. \cell }
+{{\i tryGPU} \cell }{Does the learning on the GPU if available. \cell }
 {\row }
 }
 }}
@@ -487,7 +487,7 @@ float DNF::getOutput () const{\f2 [inline]}}}
 \par
 {
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Returns the output of the {\b DNF}: the the noise free signal. }}\par
+Returns the output of the {\b DNF}: the noise free signal. }}\par
 {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 \par
 {{\s5\sb90\sa30\keepn\widctlpar\adjustright \b\f1\fs20\cgrid 
@@ -582,9 +582,9 @@ dnf_torch.h\par \pard\plain
 17 {\cf21 #include <deque>}\par
 18 \par
 19 {\cf21 #ifdef NDEBUG}\par
-20 {\cf17 const} {\cf18 bool} debugOutput = {\cf17 false};\par
+20 {\cf17 constexpr} {\cf18 bool} debugOutput = {\cf17 false};\par
 21 {\cf21 #else}\par
-22 {\cf17 const} {\cf18 bool} debugOutput = {\cf17 true};\par
+22 {\cf17 constexpr} {\cf18 bool} debugOutput = {\cf17 true};\par
 23 {\cf21 #endif}\par
 24 \par
 25 {\cf17 class }DelayLine \{\par
