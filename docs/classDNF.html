@@ -93,6 +93,7 @@ $(document).ready(function(){initNavTree('classDNF.html',''); initResizable(); }
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classDNF-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">DNF Class Reference</div></div>
 </div><!--header-->
@@ -146,6 +147,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLearningRate</b> (
 <tr class="memitem:a533c774412b0d608333cfb2840bc9990" id="r_a533c774412b0d608333cfb2840bc9990"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDNF.html#a533c774412b0d608333cfb2840bc9990">getWeightDistance</a> () const</td></tr>
 <tr class="memdesc:a533c774412b0d608333cfb2840bc9990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the overall weight distsance.  <br /></td></tr>
 <tr class="separator:a533c774412b0d608333cfb2840bc9990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af805b7437629bed07ab2529776fea00b" id="r_af805b7437629bed07ab2529776fea00b"><td class="memItemLeft" align="right" valign="top"><a id="af805b7437629bed07ab2529776fea00b" name="af805b7437629bed07ab2529776fea00b"></a>
+const torch::Device&#160;</td><td class="memItemRight" valign="bottom"><b>getTorchDevice</b> () const</td></tr>
+<tr class="memdesc:af805b7437629bed07ab2529776fea00b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the torch device for example to determine if the GPU is being used. <br /></td></tr>
+<tr class="separator:af805b7437629bed07ab2529776fea00b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad01525dc76d65df49f2ffcb5262a6b01" id="r_ad01525dc76d65df49f2ffcb5262a6b01"><td class="memItemLeft" align="right" valign="top"><a id="ad01525dc76d65df49f2ffcb5262a6b01" name="ad01525dc76d65df49f2ffcb5262a6b01"></a>
+const Net&#160;</td><td class="memItemRight" valign="bottom"><b>getModel</b> () const</td></tr>
+<tr class="memdesc:ad01525dc76d65df49f2ffcb5262a6b01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the torch model. <br /></td></tr>
+<tr class="separator:ad01525dc76d65df49f2ffcb5262a6b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:abc0e07ea13e737d7cfe28fd9373d8935" id="r_abc0e07ea13e737d7cfe28fd9373d8935"><td class="memItemLeft" align="right" valign="top"><a id="abc0e07ea13e737d7cfe28fd9373d8935" name="abc0e07ea13e737d7cfe28fd9373d8935"></a>
+static constexpr double&#160;</td><td class="memItemRight" valign="bottom"><b>xavierGain</b> = 0.01</td></tr>
+<tr class="memdesc:abc0e07ea13e737d7cfe28fd9373d8935"><td class="mdescLeft">&#160;</td><td class="mdescRight">Xavier gain for the weight init. <br /></td></tr>
+<tr class="separator:abc0e07ea13e737d7cfe28fd9373d8935"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Deep Neuronal Filter class. </p>
