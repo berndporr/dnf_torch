@@ -54,6 +54,8 @@ int main(int argc, char* argv[]){
     double norm_noise_f = noise_f / fs;
     int nSamples = 0;
 
+    torch::manual_seed(42);
+
     DNF dnf(NLAYERS,nTapsDNF,fs,ACTIVATION,tryCUDA);
 
     auto start = std::chrono::high_resolution_clock::now();

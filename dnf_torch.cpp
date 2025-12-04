@@ -58,13 +58,9 @@ DNF::DNF(const int nLayers,
 	signal_delayLine.init(signalDelayLineLength);
 	noise_delayLine.init(noiseDelayLineLength);
 
-	torch::manual_seed(42);
-
-	torch::DeviceType device_type;
 	if (tryGPU && torch::cuda::is_available()) {
-	    std::cout << "CUDA available. Training on GPU." << std::endl;
-	    device_type = torch::kCUDA;
-        device = torch::Device(device_type);
+	    const torch::DeviceType device_type = torch::kCUDA;
+	    device = torch::Device(device_type);
 	}
 
 	model = new Net(nLayers,nTaps);
@@ -110,6 +106,7 @@ float DNF::getWeightDistance() const {
     }
     return dsum;
 }
+
 
 std::vector<float> DNF::getLayerWeightDistances() const {
     std::vector<float> distances;

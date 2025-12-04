@@ -16,11 +16,6 @@ include(GNUInstallDirs)
 
 add_subdirectory(ecg_filt_demo)
 
-enable_testing ()
-
-add_executable(test_delay test_delay.cpp)
-add_test(TestDelay test_delay)
-
 add_compile_options(-Wall -Wconversion -Wextra -pedantic)
 
 add_library(dnf_torch STATIC dnf_torch.cpp)

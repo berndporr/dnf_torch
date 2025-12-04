@@ -22,34 +22,6 @@ constexpr bool debugOutput = false;
 constexpr bool debugOutput = true;
 #endif
 
-class DelayLine {
-public:
-    void init(int delaySamples) {
-        delaySamples_ = delaySamples;
-        buffer_ = std::deque<float>(delaySamples_, 0.0f);
-    }
-    
-    inline float process(float input) {
-        float output = buffer_.front();
-        buffer_.pop_front();
-        buffer_.push_back(input);
-        return output;
-    }
-    
-    float get(int i) const {
-	return buffer_[i];
-    }
-    
-    float getNewest() const {
-	return buffer_.back();
-    }
-    
-private:
-    int delaySamples_ = 0;
-    std::deque<float> buffer_;
-};
-
-
 /**
  * Deep Neuronal Filter class.
  * It's designed to be as simple as possible with
@@ -156,8 +128,55 @@ public:
      * \returns The sum of all layer weight distances.
      **/
     float getWeightDistance() const;
-    
+
+    /**
+     * Gets the torch device for example to determine if
+     * the GPU is being used.
+     **/
+    const torch::Device getTorchDevice() const {
+	return device;
+    }
+
+    /**
+     * Gets the torch model
+     **/
+    const Net getModel() const {
+	return *model;
+    }
+
+    /**
+     * Xavier gain for the weight init.
+     **/
+    static constexpr double xavierGain = 0.01;
+
 private:
+
+    class DelayLine {
+    public:
+	void init(int delay) {
+	    delaySamples = delay;
+	    buffer = std::deque<float>(delaySamples, 0.0f);
+	}
+	
+	inline float process(float input) {
+	    float output = buffer.front();
+	    buffer.pop_front();
+	    buffer.push_back(input);
+	    return output;
+	}
+	
+	float get(int i) const {
+	    return buffer[i];
+	}
+	
+	float getNewest() const {
+	    return buffer.back();
+	}
+    
+    private:
+	int delaySamples = 0;
+	std::deque<float> buffer;
+    };
 
     void saveInitialParameters() {
 	for (const auto& p : model->parameters()) { 
@@ -176,8 +195,7 @@ private:
     DelayLine noise_delayLine;
     float remover = 0;
     float f_nn = 0;
-    static constexpr double xavierGain = 0.01;
-	torch::Device device = torch::kCPU;
+    torch::Device device = torch::kCPU;
 };
 
 #endif
