@@ -13,6 +13,8 @@ which can then be used for more complex reference signals.
 ./ecg_filt_demo
 ```
 
+or if you want to use CUDA: `./ecg_filt_demo 1`.
+
 ## How to plot the results?
 
 ```

@@ -47,12 +47,10 @@ torch::Tensor DNF::Net::forward(torch::Tensor x, ActMethod am) {
 
 DNF::DNF(const int nLayers,
 	 const int nTaps,
-	 const float samplingrate,
 	 const ActMethod am,
 	 const bool tryGPU
 	) : noiseDelayLineLength(nTaps),
 	    signalDelayLineLength(noiseDelayLineLength / 2),
-	    fs(samplingrate),
 	    actMethod(am) {
 
 	signal_delayLine.init(signalDelayLineLength);

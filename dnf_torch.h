@@ -49,13 +49,11 @@ public:
      * that the final layer always just has one neuron.
      * \param nLayers Number of layers
      * \param nTaps Number of taps for the delay line feeding into the 1st layer
-     * \param samplingrate Sampling rate of the signals used in Hz.
      * \param am The activation function for the neurons. Default is tanh.
      * \param tryGPU Does the learning on the GPU if available.
      **/
     DNF(const int nLayers,
 	const int nTaps,
-	const float samplingrate,
 	const ActMethod am = Act_Tanh,
 	const bool tryGPU = false
 	);
@@ -189,7 +187,6 @@ private:
     std::vector<torch::Tensor> initialParameters;
     const int noiseDelayLineLength;
     const int signalDelayLineLength;
-    const float fs;
     const ActMethod actMethod;
     DelayLine signal_delayLine;
     DelayLine noise_delayLine;

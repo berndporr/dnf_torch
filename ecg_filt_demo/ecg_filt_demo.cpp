@@ -56,7 +56,7 @@ int main(int argc, char* argv[]){
 
     torch::manual_seed(42);
 
-    DNF dnf(NLAYERS,nTapsDNF,fs,ACTIVATION,tryCUDA);
+    DNF dnf(NLAYERS,nTapsDNF,ACTIVATION,tryCUDA);
 
     auto start = std::chrono::high_resolution_clock::now();
 
