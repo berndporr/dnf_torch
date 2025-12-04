@@ -59,7 +59,7 @@ public:
 	);
 
     inline void setLearningRate(float mu) {
-	for (auto& group : optimizer->param_groups()) {
+	for (auto& group : optimizer.param_groups()) {
             static_cast<torch::optim::SGDOptions&>(group.options()).lr(mu);
         }
     }
@@ -108,14 +108,6 @@ public:
     }
     
     /**
-     * Frees the memory used by the DNF.
-     **/
-    ~DNF() {
-	delete optimizer;
-	delete model;
-    }
-
-    /**
      * Gets the weight distances per layer
      * \returns The Eucledian weight distance in relation to the initial weights.
      **/
@@ -139,7 +131,7 @@ public:
      * Gets the torch model
      **/
     const Net getModel() const {
-	return *model;
+	return model;
     }
 
     /**
@@ -177,17 +169,17 @@ private:
     };
 
     void saveInitialParameters() {
-	for (const auto& p : model->parameters()) { 
+	for (const auto& p : model.parameters()) { 
 	    initialParameters.push_back(p.detach().clone());
 	}
     }
 
-    Net* model = nullptr;
-    torch::optim::SGD* optimizer = nullptr;
-    std::vector<torch::Tensor> initialParameters;
     const int noiseDelayLineLength;
     const int signalDelayLineLength;
     const ActMethod actMethod;
+    Net model;
+    torch::optim::SGD optimizer;
+    std::vector<torch::Tensor> initialParameters;
     DelayLine signal_delayLine;
     DelayLine noise_delayLine;
     float remover = 0;

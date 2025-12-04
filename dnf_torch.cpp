@@ -51,7 +51,10 @@ DNF::DNF(const int nLayers,
 	 const bool tryGPU
 	) : noiseDelayLineLength(nTaps),
 	    signalDelayLineLength(noiseDelayLineLength / 2),
-	    actMethod(am) {
+	    actMethod(am),
+	    model(Net(nLayers,nTaps)),
+	    optimizer(torch::optim::SGD(model.parameters(), 0))
+{
 
 	signal_delayLine.init(signalDelayLineLength);
 	noise_delayLine.init(noiseDelayLineLength);
@@ -61,11 +64,9 @@ DNF::DNF(const int nLayers,
 	    device = torch::Device(device_type);
 	}
 
-	model = new Net(nLayers,nTaps);
-	model->to(device);
-	model->train();
+	model.to(device);
+	model.train();
 	
-	optimizer = new torch::optim::SGD(model->parameters(), 0);
 	saveInitialParameters();
     }
 
@@ -81,16 +82,16 @@ float DNF::filter(const float signal, const float noise) {
     }
     noiseTimeSeries = noiseTimeSeries.to(device);
 
-    torch::Tensor output = (model->forward(noiseTimeSeries,actMethod));
+    torch::Tensor output = (model.forward(noiseTimeSeries,actMethod));
     remover = output.to(torch::kCPU).item<float>();
 
     f_nn = delayed_signal - remover;
     
-    optimizer->zero_grad();
+    optimizer.zero_grad();
     torch::Tensor gradient = torch::tensor({-f_nn}).to(device);
     output.retain_grad();
     output.backward(gradient);
-    optimizer->step();
+    optimizer.step();
 
     return f_nn;
 }
@@ -109,7 +110,7 @@ float DNF::getWeightDistance() const {
 std::vector<float> DNF::getLayerWeightDistances() const {
     std::vector<float> distances;
     int i = 0;
-    for (const auto& p : model->parameters()) {
+    for (const auto& p : model.parameters()) {
 	torch::Tensor diff = (p - initialParameters[i]).view(-1);
 	torch::Tensor dist = torch::norm(diff, 2);
 	distances.push_back(dist.item<float>());
