@@ -137,12 +137,12 @@ Version \par\page\page\vertalt
 Deep Neuronal Filter (DNF)\par \pard\plain 
 {\tc\tcl1 \v Deep Neuronal Filter (DNF)}
 {\xe \v Deep Neuronal Filter (DNF)}
-{\bkmkstart AAAAAAAAAQ}
-{\bkmkend AAAAAAAAAQ}
+{\bkmkstart AAAAAAAAAP}
+{\bkmkend AAAAAAAAAP}
 {
 \pard\plain \s17\sa60\sb30\widctlpar\qj \fs22\cgrid {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-{\bkmkstart AAAAAAAAAR}
-{\bkmkend AAAAAAAAAR}
+{\bkmkstart AAAAAAAAAQ}
+{\bkmkend AAAAAAAAAQ}
  Libtorch version\par
 {\f2 https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0277974}\par
 A realtime noise reduction filter using deep networks in autoencoder configuration. \par
@@ -216,7 +216,7 @@ Public Member Functions\par
 
 {
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-{\b DNF} (const int nLayers, const int nTaps, const float samplingrate, const {\b ActMethod} am=Act_Tanh, const bool tryGPU=false)\par
+{\b DNF} (const int nLayers, const int nTaps, const {\b ActMethod} am=Act_Tanh, const bool tryGPU=false)\par
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
 Constructor which sets up the delay lines, network layers and also calculates the number of neurons per layer so that the final layer always just has one neuron. }{
@@ -263,16 +263,6 @@ Returns the output of the {\b DNF}: the noise free signal. }{
 }\par
 }\par}
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
-
-{\b ~DNF} (){\bkmkstart AAAAAAAAAE}
-{\bkmkend AAAAAAAAAE}
-\par
-{
-\pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
-Frees the memory used by the {\b DNF}. }{
-}\par
-}\par}
-\pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 std::vector< float > {\b getLayerWeightDistances} () const\par
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -288,8 +278,8 @@ Gets the overall weight distsance. }{
 }\par}
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 
-const torch::Device {\b getTorchDevice} () const{\bkmkstart AAAAAAAAAF}
-{\bkmkend AAAAAAAAAF}
+const torch::Device {\b getTorchDevice} () const{\bkmkstart AAAAAAAAAE}
+{\bkmkend AAAAAAAAAE}
 \par
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -298,8 +288,8 @@ Gets the torch device for example to determine if the GPU is being used. }{
 }\par}
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 
-const Net {\b getModel} () const{\bkmkstart AAAAAAAAAG}
-{\bkmkend AAAAAAAAAG}
+const Net {\b getModel} () const{\bkmkstart AAAAAAAAAF}
+{\bkmkend AAAAAAAAAF}
 \par
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -314,8 +304,8 @@ Static Public Attributes\par
 {
 \pard\plain \s120\fi-360\li360\widctlpar\jclisttab\tx360{\*\pn \pnlvlbody\ilvl0\ls1\pnrnot0\pndec }\ls1\adjustright \fs20\cgrid 
 
-static constexpr double {\b xavierGain} = 0.01{\bkmkstart AAAAAAAAAH}
-{\bkmkend AAAAAAAAAH}
+static constexpr double {\b xavierGain} = 0.01{\bkmkstart AAAAAAAAAG}
+{\bkmkend AAAAAAAAAG}
 \par
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid {\i {\s17\sa60\sb30\widctlpar\qj \fs22\cgrid 
@@ -343,10 +333,10 @@ Constructor & Destructor Documentation\par
 {\xe \v DNF\:DNF}
 \pard\plain \s4\sb240\sa60\keepn\widctlpar\adjustright \b\f1\fs20\cgrid {
 {\b 
-DNF::DNF (const int  {\i nLayers}, const int  {\i nTaps}, const float  {\i samplingrate}, const {\b ActMethod}  {\i am} = {\f2 Act_Tanh}, const bool  {\i tryGPU} = {\f2 false})}}
+DNF::DNF (const int  {\i nLayers}, const int  {\i nTaps}, const {\b ActMethod}  {\i am} = {\f2 Act_Tanh}, const bool  {\i tryGPU} = {\f2 false})}}
 \par
-{\bkmkstart AAAAAAAAAI}
-{\bkmkend AAAAAAAAAI}
+{\bkmkstart AAAAAAAAAH}
+{\bkmkend AAAAAAAAAH}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -373,12 +363,6 @@ Parameters\par}
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
 \clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
 \pard \widctlpar\intbl\adjustright
-{{\i samplingrate} \cell }{Sampling rate of the signals used in Hz. \cell }
-{\row }
-\trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
-\clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx2187
-\clvertalt\clbrdrt\brdrs\brdrw10\brdrcf15 \clbrdrl\brdrs\brdrw10\brdrcf15 \clbrdrb\brdrs\brdrw10\brdrcf15 \clbrdrr \brdrs\brdrw10\brdrcf15 \cltxlrtb \cellx8748
-\pard \widctlpar\intbl\adjustright
 {{\i am} \cell }{The activation function for the neurons. Default is tanh. \cell }
 {\row }
 \trowd \trgaph108\trleft426\tblind426\trbrdrt\brdrs\brdrw10\brdrcf15 \trbrdrl\brdrs\brdrw10\brdrcf15 \trbrdrb\brdrs\brdrw10\brdrcf15 \trbrdrr\brdrs\brdrw10\brdrcf15 \trbrdrh\brdrs\brdrw10\brdrcf15 \trbrdrv\brdrs\brdrw10\brdrcf15 
@@ -399,8 +383,8 @@ Member Function Documentation\par
 {\b 
 float DNF::filter (const float  {\i signal}, const float  {\i noise})}}
 \par
-{\bkmkstart AAAAAAAAAJ}
-{\bkmkend AAAAAAAAAJ}
+{\bkmkstart AAAAAAAAAI}
+{\bkmkend AAAAAAAAAI}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -434,8 +418,8 @@ The filtered signal where the noise has been removed by the {\b DNF}. \par
 {\b 
 float DNF::getDelayedSignal () const{\f2 [inline]}}}
 \par
-{\bkmkstart AAAAAAAAAK}
-{\bkmkend AAAAAAAAAK}
+{\bkmkstart AAAAAAAAAJ}
+{\bkmkend AAAAAAAAAJ}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -454,8 +438,8 @@ The delayed noise polluted signal sample. \par
 {\b 
 std::vector< float > DNF::getLayerWeightDistances () const}}
 \par
-{\bkmkstart AAAAAAAAAL}
-{\bkmkend AAAAAAAAAL}
+{\bkmkstart AAAAAAAAAK}
+{\bkmkend AAAAAAAAAK}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -474,8 +458,8 @@ The Eucledian weight distance in relation to the initial weights. \par
 {\b 
 float DNF::getOutput () const{\f2 [inline]}}}
 \par
-{\bkmkstart AAAAAAAAAM}
-{\bkmkend AAAAAAAAAM}
+{\bkmkstart AAAAAAAAAL}
+{\bkmkend AAAAAAAAAL}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -494,8 +478,8 @@ The current output of the {\b DNF} which is idential to {\b filter()}. \par
 {\b 
 float DNF::getRemover () const{\f2 [inline]}}}
 \par
-{\bkmkstart AAAAAAAAAN}
-{\bkmkend AAAAAAAAAN}
+{\bkmkstart AAAAAAAAAM}
+{\bkmkend AAAAAAAAAM}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -514,8 +498,8 @@ The current remover signal sample. \par
 {\b 
 int DNF::getSignalDelaySteps () const{\f2 [inline]}}}
 \par
-{\bkmkstart AAAAAAAAAO}
-{\bkmkend AAAAAAAAAO}
+{\bkmkstart AAAAAAAAAN}
+{\bkmkend AAAAAAAAAN}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -534,8 +518,8 @@ Number of delay steps in samples. \par
 {\b 
 float DNF::getWeightDistance () const}}
 \par
-{\bkmkstart AAAAAAAAAP}
-{\bkmkend AAAAAAAAAP}
+{\bkmkstart AAAAAAAAAO}
+{\bkmkend AAAAAAAAAO}
 {
 \pard\plain \s61\li360\sa60\sb30\qj\widctlpar\qj\adjustright \fs20\cgrid 
 \par
@@ -594,106 +578,99 @@ dnf_torch.h\par \pard\plain
 43     \};\par
 44 \par
 45 {\cf17 public}:\par
-56     DNF({\cf17 const} {\cf18 int} nLayers,\par
-57     {\cf17 const} {\cf18 int} nTaps,\par
-58     {\cf17 const} {\cf18 float} samplingrate,\par
-59     {\cf17 const} ActMethod am = Act_Tanh,\par
-60     {\cf17 const} {\cf18 bool} tryGPU = {\cf17 false}\par
-61     );\par
-62 \par
-63     {\cf17 inline} {\cf18 void} setLearningRate({\cf18 float} mu) \{\par
-64     {\cf19 for} ({\cf17 auto}& group : optimizer->param_groups()) \{\par
-65             {\cf17 static_cast<}torch::optim::SGDOptions&{\cf17 >}(group.options()).lr(mu);\par
-66         \}\par
-67     \}\par
-68 \par
-75     {\cf18 float} filter({\cf17 const} {\cf18 float} signal, {\cf17 const} {\cf18 float} noise);\par
-76 \par
-82     {\cf17 inline} {\cf18 int} getSignalDelaySteps(){\cf17  const }\{\par
-83     {\cf19 return} signalDelayLineLength;\par
-84     \}\par
-85     \par
-91     {\cf17 inline} {\cf18 float} getDelayedSignal(){\cf17  const }\{\par
-92     {\cf19 return} signal_delayLine.get(0);\par
-93     \}\par
-94     \par
-99     {\cf17 inline} {\cf18 float} getRemover(){\cf17  const }\{\par
-100     {\cf19 return} remover;\par
-101     \}\par
-102     \par
-108     {\cf17 inline} {\cf18 float} getOutput(){\cf17  const }\{\par
-109     {\cf19 return} f_nn;\par
-110     \}\par
-111     \par
-115     ~DNF() \{\par
-116     {\cf17 delete} optimizer;\par
-117     {\cf17 delete} model;\par
-118     \}\par
-119 \par
-124     std::vector<float> getLayerWeightDistances() {\cf17 const};\par
-125 \par
-130     {\cf18 float} getWeightDistance() {\cf17 const};\par
-131 \par
-136     {\cf17 const} torch::Device getTorchDevice(){\cf17  const }\{\par
-137     {\cf19 return} device;\par
-138     \}\par
-139 \par
-143     {\cf17 const} Net getModel(){\cf17  const }\{\par
-144     {\cf19 return} *model;\par
-145     \}\par
-146 \par
-150     {\cf17 static} {\cf17 constexpr} {\cf18 double} xavierGain = 0.01;\par
-151 \par
-152 {\cf17 private}:\par
-153 \par
-154     {\cf17 class }DelayLine \{\par
-155     {\cf17 public}:\par
-156     {\cf18 void} init({\cf18 int} delay) \{\par
-157         delaySamples = delay;\par
-158         buffer = std::deque<float>(delaySamples, 0.0f);\par
-159     \}\par
-160     \par
-161     {\cf17 inline} {\cf18 float} process({\cf18 float} input) \{\par
-162         {\cf18 float} output = buffer.front();\par
-163         buffer.pop_front();\par
-164         buffer.push_back(input);\par
-165         {\cf19 return} output;\par
-166     \}\par
-167     \par
-168     {\cf18 float} get({\cf18 int} i){\cf17  const }\{\par
-169         {\cf19 return} buffer[i];\par
-170     \}\par
-171     \par
-172     {\cf18 float} getNewest(){\cf17  const }\{\par
-173         {\cf19 return} buffer.back();\par
+55     DNF({\cf17 const} {\cf18 int} nLayers,\par
+56     {\cf17 const} {\cf18 int} nTaps,\par
+57     {\cf17 const} ActMethod am = Act_Tanh,\par
+58     {\cf17 const} {\cf18 bool} tryGPU = {\cf17 false}\par
+59     );\par
+60 \par
+61     {\cf17 inline} {\cf18 void} setLearningRate({\cf18 float} mu) \{\par
+62     {\cf19 for} ({\cf17 auto}& group : optimizer.param_groups()) \{\par
+63             {\cf17 static_cast<}torch::optim::SGDOptions&{\cf17 >}(group.options()).lr(mu);\par
+64         \}\par
+65     \}\par
+66 \par
+73     {\cf18 float} filter({\cf17 const} {\cf18 float} signal, {\cf17 const} {\cf18 float} noise);\par
+74 \par
+80     {\cf17 inline} {\cf18 int} getSignalDelaySteps(){\cf17  const }\{\par
+81     {\cf19 return} signalDelayLineLength;\par
+82     \}\par
+83     \par
+89     {\cf17 inline} {\cf18 float} getDelayedSignal(){\cf17  const }\{\par
+90     {\cf19 return} signal_delayLine.get(0);\par
+91     \}\par
+92     \par
+97     {\cf17 inline} {\cf18 float} getRemover(){\cf17  const }\{\par
+98     {\cf19 return} remover;\par
+99     \}\par
+100     \par
+106     {\cf17 inline} {\cf18 float} getOutput(){\cf17  const }\{\par
+107     {\cf19 return} f_nn;\par
+108     \}\par
+109     \par
+114     std::vector<float> getLayerWeightDistances() {\cf17 const};\par
+115 \par
+120     {\cf18 float} getWeightDistance() {\cf17 const};\par
+121 \par
+126     {\cf17 const} torch::Device getTorchDevice(){\cf17  const }\{\par
+127     {\cf19 return} device;\par
+128     \}\par
+129 \par
+133     {\cf17 const} Net getModel(){\cf17  const }\{\par
+134     {\cf19 return} model;\par
+135     \}\par
+136 \par
+140     {\cf17 static} {\cf17 constexpr} {\cf18 double} xavierGain = 0.01;\par
+141 \par
+142 {\cf17 private}:\par
+143 \par
+144     {\cf17 class }DelayLine \{\par
+145     {\cf17 public}:\par
+146     {\cf18 void} init({\cf18 int} delay) \{\par
+147         delaySamples = delay;\par
+148         buffer = std::deque<float>(delaySamples, 0.0f);\par
+149     \}\par
+150     \par
+151     {\cf17 inline} {\cf18 float} process({\cf18 float} input) \{\par
+152         {\cf18 float} output = buffer.front();\par
+153         buffer.pop_front();\par
+154         buffer.push_back(input);\par
+155         {\cf19 return} output;\par
+156     \}\par
+157     \par
+158     {\cf18 float} get({\cf18 int} i){\cf17  const }\{\par
+159         {\cf19 return} buffer[i];\par
+160     \}\par
+161     \par
+162     {\cf18 float} getNewest(){\cf17  const }\{\par
+163         {\cf19 return} buffer.back();\par
+164     \}\par
+165     \par
+166     {\cf17 private}:\par
+167     {\cf18 int} delaySamples = 0;\par
+168     std::deque<float> buffer;\par
+169     \};\par
+170 \par
+171     {\cf18 void} saveInitialParameters() \{\par
+172     {\cf19 for} ({\cf17 const} {\cf17 auto}& p : model.parameters()) \{ \par
+173         initialParameters.push_back(p.detach().clone());\par
 174     \}\par
-175     \par
-176     {\cf17 private}:\par
-177     {\cf18 int} delaySamples = 0;\par
-178     std::deque<float> buffer;\par
-179     \};\par
-180 \par
-181     {\cf18 void} saveInitialParameters() \{\par
-182     {\cf19 for} ({\cf17 const} {\cf17 auto}& p : model->parameters()) \{ \par
-183         initialParameters.push_back(p.detach().clone());\par
-184     \}\par
-185     \}\par
-186 \par
-187     Net* model = {\cf17 nullptr};\par
-188     torch::optim::SGD* optimizer = {\cf17 nullptr};\par
-189     std::vector<torch::Tensor> initialParameters;\par
-190     {\cf17 const} {\cf18 int} noiseDelayLineLength;\par
-191     {\cf17 const} {\cf18 int} signalDelayLineLength;\par
-192     {\cf17 const} {\cf18 float} fs;\par
-193     {\cf17 const} ActMethod actMethod;\par
-194     DelayLine signal_delayLine;\par
-195     DelayLine noise_delayLine;\par
-196     {\cf18 float} remover = 0;\par
-197     {\cf18 float} f_nn = 0;\par
-198     torch::Device device = torch::kCPU;\par
-199 \};\par
-200 \par
-201 {\cf21 #endif}\par
+175     \}\par
+176 \par
+177     {\cf17 const} {\cf18 int} noiseDelayLineLength;\par
+178     {\cf17 const} {\cf18 int} signalDelayLineLength;\par
+179     {\cf17 const} ActMethod actMethod;\par
+180     Net model;\par
+181     torch::optim::SGD optimizer;\par
+182     std::vector<torch::Tensor> initialParameters;\par
+183     DelayLine signal_delayLine;\par
+184     DelayLine noise_delayLine;\par
+185     {\cf18 float} remover = 0;\par
+186     {\cf18 float} f_nn = 0;\par
+187     torch::Device device = torch::kCPU;\par
+188 \};\par
+189 \par
+190 {\cf21 #endif}\par
 }
 
 \pard\plain \sect\sbkpage

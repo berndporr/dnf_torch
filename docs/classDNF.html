@@ -116,9 +116,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa0a6a4321fc8e93e1a6407b9a72b66bd" id="r_aa0a6a4321fc8e93e1a6407b9a72b66bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDNF.html#aa0a6a4321fc8e93e1a6407b9a72b66bd">DNF</a> (const int nLayers, const int nTaps, const float samplingrate, const <a class="el" href="classDNF.html#a73ba107ad8339d3107a753a2a424f296">ActMethod</a> am=Act_Tanh, const bool tryGPU=false)</td></tr>
-<tr class="memdesc:aa0a6a4321fc8e93e1a6407b9a72b66bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which sets up the delay lines, network layers and also calculates the number of neurons per layer so that the final layer always just has one neuron.  <br /></td></tr>
-<tr class="separator:aa0a6a4321fc8e93e1a6407b9a72b66bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a993fcd8d7e268aac1fd28212ef3ff03b" id="r_a993fcd8d7e268aac1fd28212ef3ff03b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDNF.html#a993fcd8d7e268aac1fd28212ef3ff03b">DNF</a> (const int nLayers, const int nTaps, const <a class="el" href="classDNF.html#a73ba107ad8339d3107a753a2a424f296">ActMethod</a> am=Act_Tanh, const bool tryGPU=false)</td></tr>
+<tr class="memdesc:a993fcd8d7e268aac1fd28212ef3ff03b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor which sets up the delay lines, network layers and also calculates the number of neurons per layer so that the final layer always just has one neuron.  <br /></td></tr>
+<tr class="separator:a993fcd8d7e268aac1fd28212ef3ff03b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ae21c3cf9a06aeb26ae28253a494fcf" id="r_a5ae21c3cf9a06aeb26ae28253a494fcf"><td class="memItemLeft" align="right" valign="top"><a id="a5ae21c3cf9a06aeb26ae28253a494fcf" name="a5ae21c3cf9a06aeb26ae28253a494fcf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setLearningRate</b> (float mu)</td></tr>
 <tr class="separator:a5ae21c3cf9a06aeb26ae28253a494fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,10 +137,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setLearningRate</b> (
 <tr class="memitem:a1cb9c612383fc04383a1d8d3585e3ba3" id="r_a1cb9c612383fc04383a1d8d3585e3ba3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDNF.html#a1cb9c612383fc04383a1d8d3585e3ba3">getOutput</a> () const</td></tr>
 <tr class="memdesc:a1cb9c612383fc04383a1d8d3585e3ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the output of the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a>: the noise free signal.  <br /></td></tr>
 <tr class="separator:a1cb9c612383fc04383a1d8d3585e3ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7ca529281584cc9c5689527155e2e72" id="r_ab7ca529281584cc9c5689527155e2e72"><td class="memItemLeft" align="right" valign="top"><a id="ab7ca529281584cc9c5689527155e2e72" name="ab7ca529281584cc9c5689527155e2e72"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>~DNF</b> ()</td></tr>
-<tr class="memdesc:ab7ca529281584cc9c5689527155e2e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the memory used by the <a class="el" href="classDNF.html" title="Deep Neuronal Filter class.">DNF</a>. <br /></td></tr>
-<tr class="separator:ab7ca529281584cc9c5689527155e2e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb6e5b55bbd310a1152b4e39fc6855b1" id="r_aeb6e5b55bbd310a1152b4e39fc6855b1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDNF.html#aeb6e5b55bbd310a1152b4e39fc6855b1">getLayerWeightDistances</a> () const</td></tr>
 <tr class="memdesc:aeb6e5b55bbd310a1152b4e39fc6855b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the weight distances per layer.  <br /></td></tr>
 <tr class="separator:aeb6e5b55bbd310a1152b4e39fc6855b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,8 +163,8 @@ static constexpr double&#160;</td><td class="memItemRight" valign="bottom"><b>xa
 <div class="textblock"><p>Deep Neuronal Filter class. </p>
 <p>It's designed to be as simple as possible with only a few parameters. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa0a6a4321fc8e93e1a6407b9a72b66bd" name="aa0a6a4321fc8e93e1a6407b9a72b66bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0a6a4321fc8e93e1a6407b9a72b66bd">&#9670;&#160;</a></span>DNF()</h2>
+<a id="a993fcd8d7e268aac1fd28212ef3ff03b" name="a993fcd8d7e268aac1fd28212ef3ff03b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a993fcd8d7e268aac1fd28212ef3ff03b">&#9670;&#160;</a></span>DNF()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,12 +180,6 @@ static constexpr double&#160;</td><td class="memItemRight" valign="bottom"><b>xa
           <td></td>
           <td class="paramtype">const int&#160;</td>
           <td class="paramname"><em>nTaps</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const float&#160;</td>
-          <td class="paramname"><em>samplingrate</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -216,7 +206,6 @@ static constexpr double&#160;</td><td class="memItemRight" valign="bottom"><b>xa
   <table class="params">
     <tr><td class="paramname">nLayers</td><td>Number of layers </td></tr>
     <tr><td class="paramname">nTaps</td><td>Number of taps for the delay line feeding into the 1st layer </td></tr>
-    <tr><td class="paramname">samplingrate</td><td>Sampling rate of the signals used in Hz. </td></tr>
     <tr><td class="paramname">am</td><td>The activation function for the neurons. Default is tanh. </td></tr>
     <tr><td class="paramname">tryGPU</td><td>Does the learning on the GPU if available. </td></tr>
   </table>

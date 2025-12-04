@@ -6,8 +6,7 @@ var classDNF =
       [ "Act_ReLU", "classDNF.html#a73ba107ad8339d3107a753a2a424f296a8a50bf73b16cd91b78035a084444268f", null ],
       [ "Act_NONE", "classDNF.html#a73ba107ad8339d3107a753a2a424f296aeb25212145ecb67f7def2bf1c3e45214", null ]
     ] ],
-    [ "DNF", "classDNF.html#aa0a6a4321fc8e93e1a6407b9a72b66bd", null ],
-    [ "~DNF", "classDNF.html#ab7ca529281584cc9c5689527155e2e72", null ],
+    [ "DNF", "classDNF.html#a993fcd8d7e268aac1fd28212ef3ff03b", null ],
     [ "filter", "classDNF.html#a42f97624184f136324b094b6dba0cfb0", null ],
     [ "getDelayedSignal", "classDNF.html#afe4ca00a5c6f304ac24cf0ae2ec0dd34", null ],
     [ "getLayerWeightDistances", "classDNF.html#aeb6e5b55bbd310a1152b4e39fc6855b1", null ],
