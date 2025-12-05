@@ -107,7 +107,7 @@ float DNF::getWeightDistance() const {
 }
 
 
-std::vector<float> DNF::getLayerWeightDistances() const {
+const std::vector<float> DNF::getLayerWeightDistances() const {
     std::vector<float> distances;
     int i = 0;
     for (const auto& p : model.parameters()) {

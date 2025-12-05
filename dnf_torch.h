@@ -1,6 +1,6 @@
 /**
  * License: GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
- * Copyright (c) 2020 by Bernd Porr
+ * Copyright (c) 2020-2025 by Bernd Porr
  * Copyright (c) 2020 by Sama Daryanavard
  **/
 
@@ -24,8 +24,6 @@ constexpr bool debugOutput = true;
 
 /**
  * Deep Neuronal Filter class.
- * It's designed to be as simple as possible with
- * only a few parameters.
  **/
 class DNF {
 public:
@@ -58,6 +56,12 @@ public:
 	const bool tryGPU = false
 	);
 
+    /**
+     * Sets the learning rate of the entire network. It can
+     * be set any time during learning. Setting it to zero
+     * disables learning / adaptation.
+     * \param mu Learning rate
+     **/
     inline void setLearningRate(float mu) {
 	for (auto& group : optimizer.param_groups()) {
             static_cast<torch::optim::SGDOptions&>(group.options()).lr(mu);
@@ -111,7 +115,7 @@ public:
      * Gets the weight distances per layer
      * \returns The Eucledian weight distance in relation to the initial weights.
      **/
-    std::vector<float> getLayerWeightDistances() const;
+    const std::vector<float> getLayerWeightDistances() const;
 
     /**
      * Gets the overall weight distsance
@@ -128,7 +132,7 @@ public:
     }
 
     /**
-     * Gets the torch model
+     * Gets the torch model to, for example, to read out the weights.
      **/
     const Net getModel() const {
 	return model;

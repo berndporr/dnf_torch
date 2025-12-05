@@ -1,8 +1,8 @@
 var indexSectionsWithContent =
 {
-  0: "adfgnx",
+  0: "adfgnsx",
   1: "d",
-  2: "dfg",
+  2: "dfgs",
   3: "x",
   4: "a",
   5: "dfn"
