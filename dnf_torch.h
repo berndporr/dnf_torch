@@ -1,7 +1,7 @@
 /**
  * License: GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
  * Copyright (c) 2020-2025 by Bernd Porr
- * Copyright (c) 2020 by Sama Daryanavard
+ * Copyright (c) 2020-2022 by Sama Daryanavard
  **/
 
 #ifndef _DNF_H
@@ -23,21 +23,29 @@ constexpr bool debugOutput = true;
 #endif
 
 /**
- * Deep Neuronal Filter class.
+ * Deep Neuronal Filter
+ * https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0277974
  **/
-class DNF {
+class DNF
+{
 public:
-
     /**
      * Options for activation functions of all neurons in the network.
      **/
-    enum ActMethod {Act_Sigmoid = 1, Act_Tanh = 2, Act_ReLU = 3, Act_NONE = 0};
+    enum ActMethod
+    {
+        Act_Sigmoid = 1,
+        Act_Tanh = 2,
+        Act_ReLU = 3,
+        Act_NONE = 0
+    };
 
 private:
-    struct Net : public torch::nn::Module {
-	std::vector<torch::nn::Linear> fc;
-	Net(int nLayers, int nInput, bool withBias = false);
-	torch::Tensor forward(torch::Tensor x, ActMethod am);
+    struct Net : public torch::nn::Module
+    {
+        std::vector<torch::nn::Linear> fc;
+        Net(int nLayers, int nInput, bool withBias = false);
+        torch::Tensor forward(torch::Tensor x, ActMethod am);
     };
 
 public:
@@ -51,10 +59,9 @@ public:
      * \param tryGPU Does the learning on the GPU if available.
      **/
     DNF(const int nLayers,
-	const int nTaps,
-	const ActMethod am = Act_Tanh,
-	const bool tryGPU = false
-	);
+        const int nTaps,
+        const ActMethod am = Act_Tanh,
+        const bool tryGPU = false);
 
     /**
      * Sets the learning rate of the entire network. It can
@@ -62,11 +69,7 @@ public:
      * disables learning / adaptation.
      * \param mu Learning rate
      **/
-    inline void setLearningRate(float mu) {
-	for (auto& group : optimizer.param_groups()) {
-            static_cast<torch::optim::SGDOptions&>(group.options()).lr(mu);
-        }
-    }
+    inline void setLearningRate(float mu);
 
     /**
      * Realtime sample by sample filtering operation
@@ -81,36 +84,40 @@ public:
      * delays the signal polluted with noise.
      * \returns Number of delay steps in samples.
      **/
-    inline int getSignalDelaySteps() const {
-	return signalDelayLineLength;
+    inline int getSignalDelaySteps() const
+    {
+        return signalDelayLineLength;
     }
-    
+
     /**
-     * Returns the delayed with noise polluted signal by the delay 
+     * Returns the delayed with noise polluted signal by the delay
      * indicated by getSignalDelaySteps().
      * \returns The delayed noise polluted signal sample.
      **/
-    inline float getDelayedSignal() const {
-	return signal_delayLine.get(0);
+    inline float getDelayedSignal() const
+    {
+        return signal_delayLine.get(0);
     }
-    
+
     /**
      * Returns the remover signal.
      * \returns The current remover signal sample.
      **/
-    inline float getRemover() const {
-	return remover;
+    inline float getRemover() const
+    {
+        return remover;
     }
-    
+
     /**
      * Returns the output of the DNF: the noise
      * free signal.
      * \returns The current output of the DNF which is idential to filter().
      **/
-    inline float getOutput() const {
-	return f_nn;
+    inline float getOutput() const
+    {
+        return f_nn;
     }
-    
+
     /**
      * Gets the weight distances per layer
      * \returns The Eucledian weight distance in relation to the initial weights.
@@ -127,15 +134,17 @@ public:
      * Gets the torch device for example to determine if
      * the GPU is being used.
      **/
-    const torch::Device getTorchDevice() const {
-	return device;
+    const torch::Device getTorchDevice() const
+    {
+        return device;
     }
 
     /**
-     * Gets the torch model to, for example, to read out the weights.
+     * Gets the torch model, for example, to read out the weights.
      **/
-    const Net getModel() const {
-	return model;
+    const Net getModel() const
+    {
+        return model;
     }
 
     /**
@@ -144,38 +153,44 @@ public:
     static constexpr double xavierGain = 0.01;
 
 private:
-
-    class DelayLine {
+    class DelayLine
+    {
     public:
-	void init(int delay) {
-	    delaySamples = delay;
-	    buffer = std::deque<float>(delaySamples, 0.0f);
-	}
-	
-	inline float process(float input) {
-	    float output = buffer.front();
-	    buffer.pop_front();
-	    buffer.push_back(input);
-	    return output;
-	}
-	
-	float get(int i) const {
-	    return buffer[i];
-	}
-	
-	float getNewest() const {
-	    return buffer.back();
-	}
-    
+        void init(int delay)
+        {
+            delaySamples = delay;
+            buffer = std::deque<float>(delaySamples, 0.0f);
+        }
+
+        inline float process(float input)
+        {
+            float output = buffer.front();
+            buffer.pop_front();
+            buffer.push_back(input);
+            return output;
+        }
+
+        float get(int i) const
+        {
+            return buffer[i];
+        }
+
+        float getNewest() const
+        {
+            return buffer.back();
+        }
+
     private:
-	int delaySamples = 0;
-	std::deque<float> buffer;
+        int delaySamples = 0;
+        std::deque<float> buffer;
     };
 
-    void saveInitialParameters() {
-	for (const auto& p : model.parameters()) { 
-	    initialParameters.push_back(p.detach().clone());
-	}
+    void saveInitialParameters()
+    {
+        for (const auto &p : model.parameters())
+        {
+            initialParameters.push_back(p.detach().clone());
+        }
     }
 
     const int noiseDelayLineLength;
