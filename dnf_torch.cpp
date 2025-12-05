@@ -126,3 +126,11 @@ const std::vector<float> DNF::getLayerWeightDistances() const
 	}
 	return distances;
 }
+
+void DNF::setLearningRate(float mu)
+{
+	for (auto &group : optimizer.param_groups())
+	{
+		static_cast<torch::optim::SGDOptions &>(group.options()).lr(mu);
+	}
+}

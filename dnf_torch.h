@@ -69,7 +69,7 @@ public:
      * disables learning / adaptation.
      * \param mu Learning rate
      **/
-    inline void setLearningRate(float mu);
+    void setLearningRate(float mu);
 
     /**
      * Realtime sample by sample filtering operation
