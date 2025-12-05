@@ -1,5 +1,7 @@
 # Deep Neuronal Filter (DNF) -- libtorch version
 
+[![DOI](https://zenodo.org/badge/1102660599.svg)](https://doi.org/10.5281/zenodo.17827627)
+
 A realtime noise reduction filter using deep networks in autoencoder configuration.
 
 ![alt tag](dnf_diagram.png)
