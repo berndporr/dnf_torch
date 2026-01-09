@@ -1,5 +1,5 @@
 /**
- * License: GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+ * BSD-3 LICENSE
  * Copyright (c) 2020-2025 by Bernd Porr
  * Copyright (c) 2020-2022 by Sama Daryanavard
  **/
